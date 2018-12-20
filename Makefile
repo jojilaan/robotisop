@@ -52,13 +52,13 @@ cleaner: clean
 
 #Link
 $(TARGET): $(OBJECTS)
-$(CC) -o $(BINDIR)/$(TARGET) $^ $(LIB)
+	$(CC) -o $(BINDIR)/$(TARGET) $^ $(LIB)
 
 #Compile
 $(OBJDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $@)
-    $(CC) $(CFLAGS) $(INCDEP) -c -o $@ $<
-    @$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(OBJDIR)/$*.$(DEPEXT)
+	$(CC) $(CFLAGS) $(INCDEP) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(INCDEP) -MM $(SRCDIR)/$*.$(SRCEXT) > $(OBJDIR)/$*.$(DEPEXT)
 	@cp -f $(OBJDIR)/$*.$(DEPEXT) $(OBJDIR)/$*.$(DEPEXT).tmp
 	@sed -e 's|.*:|$(OBJDIR)/$*.$(OBJEXT):|' < $(OBJDIR)/$*.$(DEPEXT).tmp > $(OBJDIR)/$*.$(DEPEXT)
 	@sed -e 's/.*://' -e 's/\\$$//' < $(OBJDIR)/$*.$(DEPEXT).tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $(OBJDIR)/$*.$(DEPEXT)
