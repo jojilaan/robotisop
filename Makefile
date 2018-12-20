@@ -11,7 +11,7 @@ TARGET	:= darwin
 
 #The Directories, Source, Includes, Objects, Binary and Resources
 SRCDIR	:= src
-INCDIR	:= includes
+INCDIR	:= include
 OBJDIR	:= build
 BINDIR	:= bin
 SRCEXT	:= cpp
