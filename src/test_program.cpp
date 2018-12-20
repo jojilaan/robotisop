@@ -89,5 +89,9 @@ int WB(unsigned char id, unsigned char address, unsigned char value)
 
   write(fd, txpacket, length);
 
+  length = read(fd, &rxpacket[0], 6);
+
+  std::cout << length << std::endl;
+
   return 0;
 }
