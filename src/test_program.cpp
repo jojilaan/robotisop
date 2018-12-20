@@ -1,4 +1,6 @@
 #include <termios.h>
+#include <linux/serial.h>
+#include <sys/ioctl.h>
 #include <string>
 #include <iostream>
 
