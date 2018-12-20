@@ -30,10 +30,14 @@ SOURCES	:= $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS	:= $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OBJEXT)))
 
 #Defauilt Make
-all: $(TARGET)
+all: directories $(TARGET)
 
 #Remake
 remake: cleaner all
+
+directories:
+	@mkdir -p $(BINDIR)
+	@mkdir -p $(OBJDIR)
 
 #Clean only Objecst
 clean:
@@ -61,4 +65,4 @@ $(OBJDIR)/%.$(OBJEXT): $(SRCDIR)/%.$(SRCEXT)
 	@rm -f $(OBJDIR)/$*.$(DEPEXT).tmp
 
 #Non-File Targets
-.PHONY: all remake clean cleaner
+.PHONY: all remake clean cleaner directories
