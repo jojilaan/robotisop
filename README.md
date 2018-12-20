@@ -33,3 +33,5 @@ sudo setserial -g -a /dev/ttyUSB0
 	closing_wait: infinite
 	Flags: spd_cust low_latency
 ```
+
+Change these parameters everytime you reboot your system, to make the connection with the CM-730.
