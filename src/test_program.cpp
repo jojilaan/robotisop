@@ -8,14 +8,14 @@
 #include <string>
 #include <iostream>
 
-#define MAX_TX = 256
-#define MAX_RX = 1024
+#define MAX_TX 256
+#define MAX_RX 1024
 
-#define TX_ID = 2
-#define TX_INSTRUCTION = 4
-#define TX_ADDRESS = 5
-#define TX_VALUE = 6
-#define TX_LENGTH = 3
+#define TX_ID 2
+#define TX_INSTRUCTION 4
+#define TX_ADDRESS 5
+#define TX_VALUE 6
+#define TX_LENGTH 3
 
 int fd = -1;
 
@@ -80,7 +80,6 @@ int WB(unsigned int id, unsigned int address, unsigned int value)
   txpacket[TX_VALUE] = value;
   txpacket[TX_LENGTH] = 4;
 
-  int res = -1;
   int length = txpacket[TX_LENGTH] + 4;
 
   txpacket[0] = 0xFF;
