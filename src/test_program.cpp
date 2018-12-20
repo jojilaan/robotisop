@@ -2,6 +2,7 @@
 #include <linux/serial.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <string>
 #include <iostream>
 
