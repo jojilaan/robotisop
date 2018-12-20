@@ -1,5 +1,2 @@
-src/test_program
-*.[od]
-bin/*
-!bin/test
-test
+**/bin
+**/build
