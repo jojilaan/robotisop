@@ -11,7 +11,25 @@ After installing `setserial` check the parameters set for `ttyUSB0` by using the
 ```bash
 sudo setserial -g -a /dev/ttyUSB0
 /dev/ttyUSB0, Line 0, UART: unknown, Port: 0x0000, IRQL0
-	Baud_base: 24000000, close_delay:0, divisor: 1
+	Baud_base: 24000000, close_delay: 0, divisor: 1
 	closing_wait: infinite
 	Flags: spd_normal
+```
+
+Use the following commands to change the flags and divisor to set te correct baud rate for the CM-730.
+
+```bash
+sudo setserial /dev/ttyUSB0 divisor 24
+sudo setserial /dev/ttyUSB0 spd_cust
+sudo setserial /dev/ttyUSB0 low_latency
+```
+
+And check again if the parameters are set correctly:
+
+```bash
+sudo setserial -g -a /dev/ttyUSB0
+/dev/ttyUSB0, Line 0, UART: unknown, Port: 0x0000, IRQL0
+	Baud_base: 24000000, close_delay:0, divisor: 24
+	closing_wait: infinite
+	Flags: spd_cust low_latency
 ```
