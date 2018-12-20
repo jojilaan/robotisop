@@ -19,7 +19,7 @@
 
 int fd = -1;
 
-int WB(int id, int address, int value);
+int WB(unsigned char id, unsigned char address, unsigned char value);
 
 int main(int argc, char **argv)
 {
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
   return 0;
 }
 
-int WB(unsigned int id, unsigned int address, unsigned int value)
+int WB(unsigned char id, unsigned char address, unsigned char value)
 {
   unsigned char txpacket[MAX_TX + 10] = {
       0,
