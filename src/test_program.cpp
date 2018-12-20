@@ -3,6 +3,8 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string>
 #include <iostream>
 
@@ -17,7 +19,7 @@
 
 int fd = -1;
 
-int WB(int id, int address, int value, int *error);
+int WB(int id, int address, int value);
 
 int main(int argc, char **argv)
 {
@@ -43,15 +45,15 @@ int main(int argc, char **argv)
   newtio.c_lflag = 0;
   newtio.c_cc[VTIME] = 0;
   newtio.c_cc[VMIN] = 0;
-  tcsetattr(m_Socket_fd, TCSANOW, &newtio);
+  tcsetattr(fd, TCSANOW, &newtio);
 
-  ioctl(m_Socket_fd, TIOCGSERIAL, &serinfo);
+  ioctl(fd, TIOCGSERIAL, &serinfo);
   serinfo.flags &= ~ASYNC_SPD_MASK;
   serinfo.flags |= ASYNC_SPD_CUST;
   serinfo.custom_divisor = serinfo.baud_base / baudrate;
-  ioctl(m_Socket_fd, TIOCSSERIAL, &serinfo);
+  ioctl(fd, TIOCSSERIAL, &serinfo);
 
-  tcflush(m_Socket_fd, TCIFLUSH);
+  tcflush(fd, TCIFLUSH);
 
   WB(200, 24, 1);
 
@@ -63,7 +65,7 @@ int main(int argc, char **argv)
   return 0;
 }
 
-int WB(uint8_t id, uint8_t address, uint8_t value)
+int WB(unsigned int id, unsigned int address, unsigned int value)
 {
   unsigned char txpacket[MAX_TX + 10] = {
       0,
