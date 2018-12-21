@@ -1,4 +1,3 @@
-
 #ifndef _TEST_PROGRAM_HPP_
 #define _TEST_PROGRAM_HPP_
 
