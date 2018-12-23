@@ -35,3 +35,5 @@ sudo setserial -g -a /dev/ttyUSB0
 ```
 
 Change these parameters everytime you reboot your system, to make the connection with the CM-730.
+
+test
