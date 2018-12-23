@@ -1,4 +1,4 @@
-#include <iostream>
+#include "ProcesA.hpp"
 
 using namespace std;
 
@@ -8,7 +8,7 @@ class ProcesA {
       double breadth;  // Breadth of a box
       double height;   // Height of a box
 
-			string GetData(){
-				 return cout<<"HEY, you, I'm alive! Oh, and Hello World!\n";
+			void GetData(){
+				 cout<<"HEY, you, I'm alive! Oh, and Hello World!\n";
 			}
 };

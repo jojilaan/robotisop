@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-
+#include "ProcesA.hpp"
 
 using namespace std;
 
@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 
-  ProcesA a; 
+  ProcesA a;
 
   a.GetData();
   cout<<"HEY, you, I'm alive! Oh, and Hello World!\n";
