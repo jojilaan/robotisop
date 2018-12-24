@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "ProcesA.hpp"
+#include "Proces.hpp"
 
 using namespace std;
 
