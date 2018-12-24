@@ -3,6 +3,6 @@
 
 
 void GetData(){
-	cout<<"HEY, you, I'm alive! Oh, and Hello World!\n";
+	std::cout<<"HEY, you, I'm alive! Oh, and Hello World!\n";
 }
 
