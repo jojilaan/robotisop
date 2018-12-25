@@ -6,6 +6,10 @@ Connection::Connection(std::string portname)
 	_fd = -1;
 }
 
+Connection::~Connection()
+{
+}
+
 bool Connection::openConnection()
 {
 	_fd = open(_portname.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
@@ -25,8 +29,10 @@ bool Connection::openConnection()
 
 bool Connection::closeConnection()
 {
+	return true;
 }
 
 bool transferPacket(Packet packet)
 {
+	return true;
 }
