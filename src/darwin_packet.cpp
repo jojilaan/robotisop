@@ -9,7 +9,11 @@ Packet::Packet(unsigned char id, instruction inst, unsigned char address, unsign
 	_length = 4;
 }
 
-bool Packet::build()
+Packet::~Packet()
+{
+}
+
+void Packet::build()
 {
 	_txpacket[0] = 0xFF;
 	_txpacket[1] = 0xFF;
@@ -17,7 +21,7 @@ bool Packet::build()
 	_txpacket[3] = _length;
 	_txpacket[4] = _inst;
 	_txpacket[5] = _address;
-	if (_inst == instruction::READ)
+	if (_inst == Packet::READ)
 	{
 		_txpacket[6] = 1;
 	}
