@@ -11,6 +11,8 @@ Packet::Packet(unsigned char id, instruction inst, unsigned char address, unsign
 
 bool Packet::build()
 {
+	_txpacket[0] = 0xFF;
+	_txpacket[1] = 0xFF;
 	_txpacket[2] = _id;
 	_txpacket[3] = _length;
 	_txpacket[4] = _inst;
