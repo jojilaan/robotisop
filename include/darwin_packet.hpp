@@ -14,7 +14,7 @@ public:
 	Packet(unsigned char id, instruction inst, unsigned char address, unsigned char value);
 	~Packet();
 
-	bool build();
+	void build();
 	unsigned char* getTxPacket();
 	unsigned char* getRxPacket();
 
