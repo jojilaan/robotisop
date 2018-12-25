@@ -26,3 +26,7 @@ bool Connection::openConnection()
 bool Connection::closeConnection()
 {
 }
+
+bool transferPacket(Packet packet)
+{
+}
