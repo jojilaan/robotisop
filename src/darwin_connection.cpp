@@ -10,37 +10,49 @@ Connection::~Connection()
 {
 }
 
+// Creates a new connection to the given port.
 bool Connection::openConnection()
 {
+	// Prevents leaving the current filedescriptor unclosed if open.
+	if (_fd >= 0)
+	{
+		closeConnection();
+	}
+
 	_fd = open(_portname.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
+
 	if (_fd < 0)
 	{
 		if (debug)
-			std::cout << "openConnection failed" << std::endl;
+			std::cout << "openConnection() failed with the following error: " << strerror(errno) << std::endl;
 		return false;
 	}
 	else
 	{
 		if (debug)
-			std::cout << "openConnection success" << std::endl;
+			std::cout << "openConnection() success" << std::endl;
 		return true;
 	}
 }
 
+// Closes the current connection to the given port if opened.
 bool Connection::closeConnection()
 {
-	if (fd >= 0)
+	if (close(_fd) < 0)
 	{
-		if(close(fd) == 0)
-			return true
-		else
-			return false;
+		if (debug)
+			std::cout << "closeConnection() failed with the following error: " << strerror(errno) << std::endl;
+		return false;
 	}
 	else
-		return false;
+	{
+		if (debug)
+			std::cout << "closeConnection() success" << std::endl;
+		return true;
+	}
 }
 
-
+// Transfers a packet across the connection
 bool transferPacket(Packet packet)
 {
 	return true;
