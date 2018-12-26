@@ -29,6 +29,12 @@ bool Connection::openConnection()
 
 bool Connection::closeConnection()
 {
+	if (fd >= 0)
+	{
+		if(close(fd) == 0)
+			return true
+		else
+			return false;
 	return true;
 }
 
