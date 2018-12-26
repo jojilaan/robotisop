@@ -3,7 +3,10 @@
 
 #include "darwin_debug.hpp"
 #include "darwin_packet.hpp"
+#include <errno.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 #include <iostream>
 #include <string>
 
