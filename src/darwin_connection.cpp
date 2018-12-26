@@ -35,8 +35,11 @@ bool Connection::closeConnection()
 			return true
 		else
 			return false;
-	return true;
+	}
+	else
+		return false;
 }
+
 
 bool transferPacket(Packet packet)
 {
