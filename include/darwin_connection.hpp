@@ -6,6 +6,9 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <termios.h>
+#include <linux/serial.h>
+#include <sys/ioctl.h>
 #include <string.h>
 #include <iostream>
 #include <string>
@@ -23,6 +26,8 @@ public:
 private:
 	std::string _portname;
 	int _fd;
+
+	bool initConnection();
 };
 
 #endif
