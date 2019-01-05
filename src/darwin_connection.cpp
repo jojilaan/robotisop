@@ -103,10 +103,11 @@ bool Connection::initConnection()
 	/* Note that tcsetattr() returns success if any of the requested changes could be successfully carried out.
 	 * Therefore, when making multiple changes it may be necessary to follow this call with a
 	 * further call to tcgetattr() to check that all changes have been performed successfully.
-	 * 
+	 *
 	 * TCSANOW: The change occurs immediately.
 	 */
-	tcsetattr(_fd, TCSANOW, &termios_p);
+	if (tcsetattr(_fd, TCSANOW, &termios_p) < 0 && debug)
+		std::cout << "tcsetattr() failed" << std::endl;
 
 	if (ioctl(_fd, TIOCGSERIAL, &serial_struct_p) < 0)
 	{
@@ -128,7 +129,8 @@ bool Connection::initConnection()
 		return false;
 	}
 
-	tcflush(_fd, TCIFLUSH);
+	if (tcflush(_fd, TCIFLUSH) < 0 && debug)
+		std::cout << "tcflush() failed" << std::endl;
 
 	// m_ByteTransferTime = (1000.0 / baudrate) * 12.0;
 
