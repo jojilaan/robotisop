@@ -3,12 +3,13 @@
 
 Process::Process()
 {
-
+	alphabet.push_back("wrtie");
+	alphabet.push_back("read");
     // commincationdriver
-    // fsm 
-    // actions 
+    // fsm
+    // actions
     // sesitiveActions
-    // 
+    //
 
 }
 

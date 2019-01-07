@@ -10,11 +10,11 @@ class CommunicationServer
 	CommunicationServer();
 	~CommunicationServer();
 
-	
-	std::string test; 
+
+	std::string test;
 
 	private:
-	std::vector<int> process;
+	std::vector<Process> process;
 
 }
 
