@@ -3,7 +3,7 @@
 #define COMMUNICATIONSERVER_H
 #include <vector>
 #include <map>
-//#include "Process.hpp"
+#include "Process.hpp"
 
 class CommunicationServer
 {
@@ -11,12 +11,15 @@ class CommunicationServer
 	CommunicationServer();
 	~CommunicationServer();
 	void addAlphabet(std::vector<std::string>);
+	void addProcess(Process p); 
+	void printProcesses();
+
 	
 	std::vector<std::vector<int>> GetStateTable();
 	std::string test;
 
 	private:
-	//std::vector<Process> process;
+	std::vector<Process> _vProcesses;
 	std::vector<std::vector<int>> _stateTable; 
 
 };

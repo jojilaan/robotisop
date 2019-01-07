@@ -1,9 +1,10 @@
 #include "Process.hpp"
 #include <iostream> 
 
-Process::Process(CommunicationServer communicationserver)
+Process::Process(std::string name)
 {
-    _a = communicationserver; 
+    _name = name; 
+    //_a = communicationserver; 
 	//_alphabet.push_back("wrtie");
 	//_alphabet.push_back("read");
     // commincationdriver
@@ -22,7 +23,7 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
     // ADD to yourself 
     _alphabet = alphabet; 
     // Add to communicationServer; 
-    //_/a.addAlphabet(_alphabet); 
+    //_communicationserver.addAlphabet(_alphabet); 
 }
 
 void Process::addStates(std::vector<int> states)
@@ -50,4 +51,9 @@ void Process::printStates()
         printf("%d, ", state);
     }
     printf("\n");
+}
+
+std::string Process::getName()
+{
+    return _name; 
 }

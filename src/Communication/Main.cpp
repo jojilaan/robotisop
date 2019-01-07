@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include "Process.hpp"
+#include "CommunicationServer.hpp"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ int main()
   stateTransition.push_back(1);
 	stateTransition.push_back(-1);
 	
-  Process proc(communicationserver);
+  Process proc("Proc1");
   proc.addAlphabet(alphabet); 
   proc.addStates(stateTransition);
 	printf("Alphabet\n");
@@ -34,9 +35,14 @@ int main()
   stateTransition.clear();
 	stateTransition.push_back(-1);
 	stateTransition.push_back(1);
-  
+  Process proc2("Proc2");
+  proc2.addAlphabet(alphabet); 
+  proc2.addStates(stateTransition);
+  communicationserver.addProcess(proc); 
+  communicationserver.addProcess(proc2); 
+  communicationserver.printProcesses(); 
   //proc.push_back(proc);
-
 
   return 1;
 }
+
