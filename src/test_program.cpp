@@ -72,7 +72,7 @@ int main()
 
 	usleep(1000000);
 
-	packet = Packet(4, Packet::WRITEW, 30, 2000);
+	packet = Packet(2, Packet::WRITEW, 30, 2000);
 	packet.build();
 	connection.transferPacket(packet);
 
