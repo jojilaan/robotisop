@@ -66,13 +66,11 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	packet = Packet(2, Packet::WRITEW, 30, 400);
+	packet = Packet(19, Packet::READ, 2);
 	packet.build();
 	connection.transferPacket(packet);
+	std::cout << (int)packet.getRxPacket()[5] << std::endl;
 
-	packet = Packet(1, Packet::WRITEW, 30, 3600);
-	packet.build();
-	connection.transferPacket(packet);
 
 	// while (1)
 	// {
