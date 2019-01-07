@@ -157,17 +157,21 @@ bool Connection::transferPacket(Packet packet)
 			int to_length = 0;
 
 			if (packet.getTxPacket()[4] == Packet::READ)
-				to_length = packet.getTxPacket()[5 + 1] + 6;
+			{
+				to_length = packet.getTxPacket()[6] + 6;
+				std::cout << "READ" << std::endl;
+			}
 			else
+			{
 				to_length = 6;
-
-			// m_Platform->SetPacketTimeout(length);
+				std::cout << "WRITE" << std::endl;
+			}
 
 			int get_length = 0;
 
 			while (1)
 			{
-				length = read(_fd, &(packet.getRxPacket()[get_length]), to_length - get_length);
+				length = read(_fd, &packet.getRxPacket()[get_length], to_length - get_length);
 				get_length += length;
 
 				if (get_length == to_length)
