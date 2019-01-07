@@ -117,6 +117,10 @@ bool Connection::initConnection()
 		return false;
 	}
 
+	std::cout << serial_struct_p.baud_base << std::endl;
+	std::cout << serial_struct_p.custom_divisor << std::endl;
+	std::cout << serial_struct_p.flags << std::endl;
+
 	serial_struct_p.flags &= ~ASYNC_SPD_MASK;
 	serial_struct_p.flags |= ASYNC_SPD_CUST;
 	serial_struct_p.custom_divisor = serial_struct_p.baud_base / 1000000.0;
