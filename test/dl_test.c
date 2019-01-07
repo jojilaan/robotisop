@@ -97,6 +97,7 @@ void *run_deadline(void *data)
 	while (!done)
 	{
 		printf("realtime\n");
+		sched_yield();
 	}
 
 	printf("deadline thread dies [%ld]\n", gettid());
