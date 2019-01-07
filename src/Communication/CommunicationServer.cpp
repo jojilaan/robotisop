@@ -6,6 +6,7 @@ CommunicationServer::CommunicationServer()
 {
 	//std::vector<std::vector<int>> stateTable;
 	//_stateTable.push_back(p);
+    
 }
 
 CommunicationServer::~CommunicationServer()
