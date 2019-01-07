@@ -69,9 +69,10 @@ int sched_getattr(pid_t pid,
 void *run_deadline(void *data)
 {
 	struct sched_attr attr;
-	int x = 0;
 	int ret;
 	unsigned int flags = 0;
+	unsigned long long runtime = 1000000000L;
+	unsigned long long period = 3000000000L;
 
 	printf("deadline thread started [%ld]\n", gettid());
 
@@ -82,8 +83,8 @@ void *run_deadline(void *data)
 
 	/* This creates a 10ms/30ms reservation */
 	attr.sched_policy = SCHED_DEADLINE;
-	attr.sched_runtime = 1000 * 1000 * 1000;
-	attr.sched_period = attr.sched_deadline = 3000 * 1000 * 1000;
+	attr.sched_runtime = runtime;
+	attr.sched_period = attr.sched_deadline = period;
 
 	ret = sched_setattr(0, &attr, flags);
 	if (ret < 0)
