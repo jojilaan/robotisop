@@ -79,7 +79,6 @@ void sleepCustom(double msec)
 
 void *run_deadline(void *data)
 {
-	time_t t = clock();
 	struct sched_attr attr;
 	int ret;
 	unsigned int flags = 0;
@@ -146,9 +145,6 @@ void *run_deadline(void *data)
 	packet.build();
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-
-	t = clock() - t;
-	std::cout << t / CLOCKS_PER_SEC << std::endl;
 
 	while (!done)
 	{
