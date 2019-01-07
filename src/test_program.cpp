@@ -79,6 +79,8 @@ int main()
 
 			printf("%4d", value);
 			packet = Packet(2, Packet::WRITEW, 30, 4096 - value);
+			packet.build();
+			connection.transferPacket(packet);
 		}
 		else
 			printf("----");
@@ -92,6 +94,8 @@ int main()
 
 			printf("%4d", value);
 			packet = Packet(4, Packet::WRITEW, 30, 4096 - value);
+			packet.build();
+			connection.transferPacket(packet);
 		}
 		else
 			printf("----");
@@ -104,6 +108,8 @@ int main()
 			int value = (int)(((int)packet.getRxPacket()[5] << 8) + (int)packet.getRxPacket()[6]);
 			printf("%4d", value);
 			packet = Packet(6, Packet::WRITEW, 30, 4096 - value);
+			packet.build();
+			connection.transferPacket(packet);
 		}
 		else
 			printf("----");
@@ -121,6 +127,8 @@ int main()
 				value++;
 
 			packet = Packet(200, Packet::WRITEW, 26, value);
+			packet.build();
+			connection.transferPacket(packet);
 		}
 
 		packet = Packet(200, Packet::READW, 28);
@@ -136,6 +144,8 @@ int main()
 				value--;
 
 			packet = Packet(200, Packet::WRITEW, 28, value);
+			packet.build();
+			connection.transferPacket(packet);
 		}
 
 		usleep(50000);
