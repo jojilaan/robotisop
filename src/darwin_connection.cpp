@@ -117,10 +117,6 @@ bool Connection::initConnection()
 		return false;
 	}
 
-	std::cout << serial_struct_p.baud_base << std::endl;
-	std::cout << serial_struct_p.custom_divisor << std::endl;
-	std::cout << serial_struct_p.flags << std::endl;
-
 	serial_struct_p.flags &= ~ASYNC_SPD_MASK;
 	serial_struct_p.flags |= ASYNC_SPD_CUST;
 	serial_struct_p.custom_divisor = serial_struct_p.baud_base / 1000000.0;
@@ -145,7 +141,68 @@ bool Connection::initConnection()
 }
 
 // Transfers a packet across the connection
-bool transferPacket(Packet packet)
+bool Connection::transferPacket(Packet packet)
 {
-	return true;
+	bool res = false;
+	int length = packet.getTxPacket()[3] + 4;
+
+	packet.getTxPacket()[length - 1] = Packet::calculateChecksum(packet.getTxPacket());
+
+	if (length < (256 + 6))
+	{
+		tcflush(_fd, TCIFLUSH);
+
+		if (write(_fd, packet.getTxPacket(), length) == length)
+		{
+			int to_length = 0;
+
+			if (packet.getTxPacket()[4] == Packet::READ)
+				to_length = packet.getTxPacket()[5 + 1] + 6;
+			else
+				to_length = 6;
+
+			// m_Platform->SetPacketTimeout(length);
+
+			int get_length = 0;
+
+			while (1)
+			{
+				length = read(_fd, &packet.getRxPacket()[get_length], to_length - get_length);
+				get_length += length;
+
+				if (get_length == to_length)
+				{
+					// Find packet header
+					int i;
+					for (i = 0; i < (get_length - 1); i++)
+					{
+						if (packet.getRxPacket()[i] == 0xFF && packet.getRxPacket()[i + 1] == 0xFF)
+							break;
+						else if (i == (get_length - 2) && packet.getRxPacket()[get_length - 1] == 0xFF)
+							break;
+					}
+
+					if (i == 0)
+					{
+						// Check checksum
+						unsigned char checksum = Packet::calculateChecksum(packet.getRxPacket());
+
+						if (packet.getRxPacket()[get_length - 1] == checksum)
+							res = true;
+						else
+							res = false;
+						break;
+					}
+					else
+					{
+						for (int j = 0; j < (get_length - i); j++)
+							packet.getRxPacket()[j] = packet.getRxPacket()[j + i];
+						get_length -= i;
+					}
+				}
+			}
+		}
+	}
+
+	return res;
 }
