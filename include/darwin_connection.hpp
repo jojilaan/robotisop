@@ -21,7 +21,7 @@ public:
 	bool openConnection();
 	bool closeConnection();
 
-	bool transferPacket(Packet packet);
+	bool transferPacket(Packet& packet);
 
 private:
 	std::string _portname;

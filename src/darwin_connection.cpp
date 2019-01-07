@@ -141,7 +141,7 @@ bool Connection::initConnection()
 }
 
 // Transfers a packet across the connection
-bool Connection::transferPacket(Packet packet)
+bool Connection::transferPacket(Packet& packet)
 {
 	unsigned char *txpacket = packet.getTxPacket();
 	unsigned char *rxpacket = packet.getRxPacket();
