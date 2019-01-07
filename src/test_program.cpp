@@ -78,6 +78,9 @@ int main()
 			int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
 
 			printf("%4d", value);
+			std::cout << packet.getRxPacket()[5] << std::endl;
+			std::cout << packet.getRxPacket()[6] << std::endl;
+
 			packet = Packet(2, Packet::WRITEW, 30, 4096 - value);
 			packet.build();
 			connection.transferPacket(packet);
