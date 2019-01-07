@@ -1,8 +1,16 @@
 #include <test_program.hpp>
+#include <darwin_connection.hpp>
 
 int fd = -1;
 
-int main(int argc, char **argv)
+int main()
+{
+	Connection connection = Connection("/dev/ttyUSB0");
+	connection.openConnection();
+	connection.closeConnection();
+}
+
+int not_main(int argc, char **argv)
 {
 	struct termios newtio;
 	struct serial_struct serinfo;
