@@ -24,8 +24,8 @@ public:
 	static unsigned char calculateChecksum(unsigned char *p);
 
 private:
-	unsigned char _txpacket[256 + 10];
-	unsigned char _rxpacket[1024 + 10];
+	unsigned char _txpacket[256 + 10] = {0, };
+	unsigned char _rxpacket[1024 + 10] = {0, };
 	unsigned char _id;
 	instruction _inst;
 	unsigned char _address;
