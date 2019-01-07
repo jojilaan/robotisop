@@ -143,22 +143,24 @@ bool Connection::initConnection()
 // Transfers a packet across the connection
 bool Connection::transferPacket(Packet packet)
 {
+	unsigned char *txpacket = packet.getTxPacket();
+	unsigned char *rxpacket = packet.getRxPacket();
 	bool res = false;
-	int length = packet.getTxPacket()[3] + 4;
+	int length = txpacket[3] + 4;
 
-	packet.getTxPacket()[length - 1] = Packet::calculateChecksum(packet.getTxPacket());
+	txpacket[length - 1] = Packet::calculateChecksum(txpacket);
 
 	if (length < (256 + 6))
 	{
 		tcflush(_fd, TCIFLUSH);
 
-		if (write(_fd, packet.getTxPacket(), length) == length)
+		if (write(_fd, txpacket, length) == length)
 		{
 			int to_length = 0;
 
-			if (packet.getTxPacket()[4] == Packet::READ)
+			if (txpacket[4] == Packet::READ)
 			{
-				to_length = packet.getTxPacket()[6] + 6;
+				to_length = txpacket[6] + 6;
 			}
 			else
 			{
@@ -169,7 +171,7 @@ bool Connection::transferPacket(Packet packet)
 
 			while (1)
 			{
-				length = read(_fd, &packet.getRxPacket()[get_length], to_length - get_length);
+				length = read(_fd, &rxpacket[get_length], to_length - get_length);
 				get_length += length;
 
 				if (get_length == to_length)
@@ -178,18 +180,18 @@ bool Connection::transferPacket(Packet packet)
 					int i;
 					for (i = 0; i < (get_length - 1); i++)
 					{
-						if (packet.getRxPacket()[i] == 0xFF && packet.getRxPacket()[i + 1] == 0xFF)
+						if (rxpacket[i] == 0xFF && rxpacket[i + 1] == 0xFF)
 							break;
-						else if (i == (get_length - 2) && packet.getRxPacket()[get_length - 1] == 0xFF)
+						else if (i == (get_length - 2) && rxpacket[get_length - 1] == 0xFF)
 							break;
 					}
 
 					if (i == 0)
 					{
 						// Check checksum
-						unsigned char checksum = Packet::calculateChecksum(packet.getRxPacket());
+						unsigned char checksum = Packet::calculateChecksum(rxpacket);
 
-						if (packet.getRxPacket()[get_length - 1] == checksum)
+						if (rxpacket[get_length - 1] == checksum)
 							res = true;
 						else
 							res = false;
@@ -198,7 +200,7 @@ bool Connection::transferPacket(Packet packet)
 					else
 					{
 						for (int j = 0; j < (get_length - i); j++)
-							packet.getRxPacket()[j] = packet.getRxPacket()[j + i];
+							rxpacket[j] = rxpacket[j + i];
 						get_length -= i;
 					}
 				}
