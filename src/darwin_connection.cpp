@@ -159,12 +159,10 @@ bool Connection::transferPacket(Packet packet)
 			if (packet.getTxPacket()[4] == Packet::READ)
 			{
 				to_length = packet.getTxPacket()[6] + 6;
-				std::cout << "READ" << std::endl;
 			}
 			else
 			{
 				to_length = 6;
-				std::cout << "WRITE" << std::endl;
 			}
 
 			int get_length = 0;
