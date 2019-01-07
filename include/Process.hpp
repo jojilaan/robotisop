@@ -3,23 +3,25 @@
 #include <vector>
 #include <map>
 #include "CommunicationServer.hpp"
-
-
+//c CommunicationServer; 
 
 class Process
 {
-
-	Process(std::vector<std::vector<int>> fsm);
+    public:
+	Process(CommunicationServer communicationserver);
 	~Process();
-
-	public:
-
-	private:
-    CommunicationServer communicationServer;
-		std::vector<std::string> alphabet;
-		std::vector<std::string> sensitivityList;
-
-
-}
+    void addAlphabet(std::vector<std::string> alpahbet);
+	void addStates(std::vector<int> states);
+    void printAlphabet();
+    void printStates();
+	
+    
+    private:
+    std::vector<std::string> _alphabet;
+    std::vector<int> _states;
+	std::vector<std::string> _sensitivityList;
+    CommunicationServer _communicationserver;
+    CommunicationServer _a; 
+};
 
 #endif

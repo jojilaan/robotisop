@@ -1,25 +1,22 @@
 #include "CommunicationServer.hpp"
+#include "Process.hpp"
 
 
 CommunicationServer::CommunicationServer()
 {
-	std::vector<std::vector<int>> stateTable;
-	std::vector<int> p;
-
-	p.push_back(1);
-	p.push_back(-1);
-	stateTable.push_back(p);
-	p.clear();
-	p.push_back(-1);
-	p.push_back(1);
-	stateTable.push_back(p);
-
-	process.push_back(Process(stateTable));
+	//std::vector<std::vector<int>> stateTable;
+	//_stateTable.push_back(p);
 }
 
 CommunicationServer::~CommunicationServer()
 {
 
 }
+
+std::vector<std::vector<int>> CommunicationServer::GetStateTable()
+{
+    return _stateTable; 
+}
+
 
 
