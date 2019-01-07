@@ -7,10 +7,17 @@ int main()
 {
 	Connection connection = Connection("/dev/ttyUSB0");
 	connection.openConnection();
+	Packet packet = Packet(200, Packet::WRITE, 24, static_cast<unsigned char>(1));
+	packet.build();
+	if (connection.transferPacket(packet)) {
+		std::cout << "SUCCES" << std::endl;
+		packet = Packet(200, Packet::WRITE, 26, (int)((((255 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((0 & 0xFF) >> 3)));
+	}
+
 	connection.closeConnection();
 }
 
-int not_main(int argc, char **argv)
+int not_main()
 {
 	struct termios newtio;
 	struct serial_struct serinfo;
