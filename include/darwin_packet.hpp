@@ -3,20 +3,24 @@
 
 #include "darwin_debug.hpp"
 
-class Packet {
+class Packet
+{
 public:
-	enum instruction {
+	enum instruction
+	{
 		PING = 1,
 		READ,
 		WRITE
 	};
 
 	Packet(unsigned char id, instruction inst, unsigned char address, unsigned char value);
+	Packet(unsigned char id, instruction inst, unsigned char address, int value);
 	~Packet();
 
 	void build();
-	unsigned char* getTxPacket();
-	unsigned char* getRxPacket();
+	unsigned char *getTxPacket();
+	unsigned char *getRxPacket();
+	static unsigned char calculateChecksum(unsigned char *p);
 
 private:
 	unsigned char _txpacket[256 + 10];
@@ -25,6 +29,7 @@ private:
 	instruction _inst;
 	unsigned char _address;
 	unsigned char _value;
+	unsigned char _value2;
 	unsigned char _length;
 };
 
