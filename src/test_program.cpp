@@ -66,56 +66,60 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	while (1)
-	{
-		printf("\r");
+	packet = Packet(2, Packet::WRITEW, 30, 400);
+	packet.build();
+	connection.transferPacket(packet);
 
-		printf(" ID[%d]:", 1);
-		packet = Packet(1, Packet::READW, 36);
-		packet.build();
-		if (connection.transferPacket(packet))
-		{
-			int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
+	// while (1)
+	// {
+	// 	printf("\r");
 
-			printf("%4d", value);
-			packet = Packet(2, Packet::WRITEW, 30, 4096 - value);
-			packet.build();
-			connection.transferPacket(packet);
-		}
-		else
-			printf("----");
+	// 	printf(" ID[%d]:", 1);
+	// 	packet = Packet(1, Packet::READW, 36);
+	// 	packet.build();
+	// 	if (connection.transferPacket(packet))
+	// 	{
+	// 		int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
 
-		printf(" ID[%d]:", 3);
-		packet = Packet(3, Packet::READW, 36);
-		packet.build();
-		if (connection.transferPacket(packet))
-		{
-			int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
+	// 		printf("%4d", value);
+	// 		packet = Packet(2, Packet::WRITEW, 30, 4096 - value);
+	// 		packet.build();
+	// 		connection.transferPacket(packet);
+	// 	}
+	// 	else
+	// 		printf("----");
 
-			printf("%4d", value);
-			packet = Packet(4, Packet::WRITEW, 30, 4096 - value);
-			packet.build();
-			connection.transferPacket(packet);
-		}
-		else
-			printf("----");
+	// 	printf(" ID[%d]:", 3);
+	// 	packet = Packet(3, Packet::READW, 36);
+	// 	packet.build();
+	// 	if (connection.transferPacket(packet))
+	// 	{
+	// 		int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
 
-		printf(" ID[%d]:", 5);
-		packet = Packet(5, Packet::READW, 36);
-		packet.build();
-		if (connection.transferPacket(packet))
-		{
-			int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
-			printf("%4d", value);
-			packet = Packet(6, Packet::WRITEW, 30, 4096 - value);
-			packet.build();
-			connection.transferPacket(packet);
-		}
-		else
-			printf("----");
+	// 		printf("%4d", value);
+	// 		packet = Packet(4, Packet::WRITEW, 30, 4096 - value);
+	// 		packet.build();
+	// 		connection.transferPacket(packet);
+	// 	}
+	// 	else
+	// 		printf("----");
 
-		usleep(50000);
-	}
+	// 	printf(" ID[%d]:", 5);
+	// 	packet = Packet(5, Packet::READW, 36);
+	// 	packet.build();
+	// 	if (connection.transferPacket(packet))
+	// 	{
+	// 		int value = (int)(((int)packet.getRxPacket()[6] << 8) + (int)packet.getRxPacket()[5]);
+	// 		printf("%4d", value);
+	// 		packet = Packet(6, Packet::WRITEW, 30, 4096 - value);
+	// 		packet.build();
+	// 		connection.transferPacket(packet);
+	// 	}
+	// 	else
+	// 		printf("----");
+
+	// 	usleep(50000);
+	// }
 
 	connection.closeConnection();
 }
