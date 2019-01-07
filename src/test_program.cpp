@@ -79,6 +79,7 @@ void sleepCustom(double msec)
 
 void *run_deadline(void *data)
 {
+	time_t t = clock();
 	struct sched_attr attr;
 	int ret;
 	unsigned int flags = 0;
@@ -146,6 +147,8 @@ void *run_deadline(void *data)
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
+	std::cout << clock() - t << std::endl;
+
 	while (!done)
 	{
 		packet = Packet(2, Packet::WRITEW, 30, 400);
@@ -157,8 +160,6 @@ void *run_deadline(void *data)
 		packet = Packet(2, Packet::WRITEW, 30, 2000);
 		packet.build();
 		connection.transferPacket(packet);
-
-		usleep(50000);
 
 		sched_yield();
 	}
@@ -176,7 +177,7 @@ int main()
 
 	pthread_create(&thread, NULL, run_deadline, NULL);
 
-	sleep(10);
+	sleep(12);
 
 	done = 1;
 	pthread_join(thread, NULL);
