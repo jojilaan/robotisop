@@ -70,6 +70,10 @@ int main()
 	packet.build();
 	connection.transferPacket(packet);
 
+	packet = Packet(1, Packet::WRITEW, 30, 3600);
+	packet.build();
+	connection.transferPacket(packet);
+
 	// while (1)
 	// {
 	// 	printf("\r");
