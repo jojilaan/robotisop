@@ -8,12 +8,13 @@ class Packet
 public:
 	enum instruction
 	{
-		PING = 1,
-		READ,
-		WRITE
+		READ = 2,
+		WRITE,
+		READW,
+		WRITEW,
 	};
 
-	Packet(unsigned char id, instruction inst, unsigned char address, unsigned char value);
+	Packet(unsigned char id, instruction inst, unsigned char address);
 	Packet(unsigned char id, instruction inst, unsigned char address, int value);
 	~Packet();
 
