@@ -6,15 +6,15 @@
 
 class CommunicationServer
 {
-
+	public:
 	CommunicationServer();
 	~CommunicationServer();
 
-	public:
+	
+	std::string test; 
 
 	private:
-	Vector<Process> process;
-
+	std::vector<int> process;
 
 }
 
