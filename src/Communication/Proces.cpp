@@ -1,19 +1,14 @@
 #include "Process.hpp"
 #include <iostream>
 
-Process::Process(std::string name, int table[2][2])
+Process::Process(std::string name,  int** stateTable, int states)
 {
 	_name = name;
-    for(int i = 0; i< 2; i++){
-        for(int j = 0; j<2; j++){
-             _stateTable2d[i][j] = table[i][j];
-        }
-       
-    }
-	//_stateTable2d = table;
+    _states = states;
+    _stateTable = stateTable; 
 	_currentState = 0;
+    //_sensitivityList = NULL;
 }
-
 
 Process::~Process()
 {
@@ -23,14 +18,11 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
 {
 	// ADD to yourself
 	_alphabet = alphabet;
+    //std::map<int, std::string> _m; 
+    _m[1] = "Write man\n"; 
+    //std::cout << _m[1]; 
 	// Add to communicationServer;
 	//_communicationserver.addAlphabet(_alphabet);
-}
-
-void Process::addStates(std::vector<int> states)
-{
-	// ADD to yourself
-	_states = states;
 }
 
 void Process::printAlphabet()
@@ -38,18 +30,8 @@ void Process::printAlphabet()
 	// ADD to yourself
 	for (const auto alpha : _alphabet)
 	{
-		std::cout << alpha;
-		//printf("%s, ", alpha);
-	}
-	printf("\n");
-}
-
-void Process::printStates()
-{
-	// ADD to yourself
-	for (const auto state : _states)
-	{
-		printf("%d, ", state);
+		std::cout <<  alpha << ' ';
+		//printf("%s , ", alpha);
 	}
 	printf("\n");
 }
@@ -62,12 +44,13 @@ std::string Process::getName()
 std::vector<int> Process::getSensitivityList()
 {
 	_sensitivityList.clear();
-	for(int i = 0; i < 2; i++)
+	for(int i = 0; i < _states; i++)
 	{
-		printf("state: %d \n", _stateTable2d[i][_currentState]);
-		if(_stateTable2d[i][_currentState] != -1)
+		printf("state: %d \n", _stateTable[i][_currentState]);
+		if(_stateTable[i][_currentState] != -1)
 		{
-			_sensitivityList.push_back(_stateTable2d[i][_currentState]);
+            std::cout << "hashmap " <<_m[_stateTable[i][_currentState]]; 
+			_sensitivityList.push_back(_stateTable[i][_currentState]);
 		}
 	}
 

@@ -17,24 +17,27 @@ class CommunicationServer;
 class Process
 {
 public:
-	Process(std::string name, int table[2][2]);
+	Process(std::string name, int** test, int row);
 	//Process(std::string name, std::array<std::array<int, 3>, 3> stateTable);
 	~Process();
 	void addAlphabet(std::vector<std::string> alpahbet);
-	void addStates(std::vector<int> states);
+	//void addStates(std::vector<int> states);
 	void printAlphabet();
-	void printStates();
+	//void printStates();
 	std::string getName();
 	std::vector<int> getSensitivityList();
 
 private:
 	std::vector<std::string> _alphabet;
-	int _stateTable2d[2][2];
-	std::array<std::array<int, 3>, 3> _stateTable3d;
+	//int _stateTable2d[2][2];
+    int** _stateTable; 
+	//std::array<std::array<int, 3>, 3> _stateTable3d;
 	std::string _name;
 	int _currentState;
 	std::vector<int> _sensitivityList;
-    std::vector<int> _states; 
+    //std::vector<int> _states; 
+    int _states;
+    std::map<int, std::string> _m;
 };
 
 #endif

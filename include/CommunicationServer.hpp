@@ -13,7 +13,7 @@ class CommunicationServer
 	void addAlphabet(std::vector<std::string>);
 	void addProcess(Process p); 
 	void printProcesses();
-
+    void nextState(int); 
 	
 	std::vector<std::vector<int>> GetStateTable();
 	std::string test;
