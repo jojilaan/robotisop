@@ -82,8 +82,8 @@ void *run_deadline(void *data)
 
 	/* This creates a 10ms/30ms reservation */
 	attr.sched_policy = SCHED_DEADLINE;
-	attr.sched_runtime = 10 * 1000 * 1000;
-	attr.sched_period = attr.sched_deadline = 30 * 1000 * 1000;
+	attr.sched_runtime = 1000 * 1000 * 1000;
+	attr.sched_period = attr.sched_deadline = 3000 * 1000 * 1000;
 
 	ret = sched_setattr(0, &attr, flags);
 	if (ret < 0)
@@ -95,7 +95,7 @@ void *run_deadline(void *data)
 
 	while (!done)
 	{
-		x++;
+		printf("realtime\n");
 	}
 
 	printf("deadline thread dies [%ld]\n", gettid());
