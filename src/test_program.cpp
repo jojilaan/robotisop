@@ -12,6 +12,8 @@ int main()
 	if (connection.transferPacket(packet)) {
 		std::cout << "SUCCES" << std::endl;
 		packet = Packet(200, Packet::WRITE, 26, (int)((((255 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((0 & 0xFF) >> 3)));
+		packet.build();
+		connection.transferPacket(packet);
 	}
 
 	connection.closeConnection();
