@@ -167,7 +167,7 @@ bool Connection::transferPacket(Packet packet)
 
 			while (1)
 			{
-				length = read(_fd, &packet.getRxPacket()[get_length], to_length - get_length);
+				length = read(_fd, &(packet.getRxPacket()[get_length]), to_length - get_length);
 				get_length += length;
 
 				if (get_length == to_length)
