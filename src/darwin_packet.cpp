@@ -39,8 +39,7 @@ void Packet::build()
 	else
 	{
 		_txpacket[6] = _value;
-		if (_value2 != 0)
-			_txpacket[7] = _value2;
+		_txpacket[7] = _value2;
 	}
 }
 
