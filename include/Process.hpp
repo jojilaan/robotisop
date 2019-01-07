@@ -6,18 +6,19 @@ class CommunicationServer;
 //#include "CommunicationServer.hpp"
 //c CommunicationServer;
 
-enum alphabet
+/*enum class alphabet
 {
 	WRITE,
-	READ;
-	BW;
+	READ,
+	BW
 };
+*/ 
 
 class Process
 {
 public:
-	Process(std::string name, std::array<std::array<int, 2>, 2> stateTable);
-	Process(std::string name, std::array<std::array<int, 3>, 3> stateTable);
+	Process(std::string name, int table[2][2]);
+	//Process(std::string name, std::array<std::array<int, 3>, 3> stateTable);
 	~Process();
 	void addAlphabet(std::vector<std::string> alpahbet);
 	void addStates(std::vector<int> states);
@@ -28,11 +29,12 @@ public:
 
 private:
 	std::vector<std::string> _alphabet;
-	std::array<std::array<int, 2>, 2> _stateTable2d;
+	int _stateTable2d[2][2];
 	std::array<std::array<int, 3>, 3> _stateTable3d;
 	std::string _name;
 	int _currentState;
-	vector<int> _sensitivityList;
+	std::vector<int> _sensitivityList;
+    std::vector<int> _states; 
 };
 
 #endif

@@ -1,27 +1,19 @@
 #include "Process.hpp"
 #include <iostream>
 
-Process(std::string name, std::array<std::array<int, 2>, 2> stateTable)
+Process::Process(std::string name, int table[2][2])
 {
 	_name = name;
-	_stateTable2d = stateTable;
+    for(int i = 0; i< 2; i++){
+        for(int j = 0; j<2; j++){
+             _stateTable2d[i][j] = table[i][j];
+        }
+       
+    }
+	//_stateTable2d = table;
 	_currentState = 0;
 }
 
-Process(std::string name, std::array<std::array<int, 3>, 3> stateTable)
-{
-	_name = name;
-	_stateTable = stateTable;
-	_currentState = 0;
-	//_a = communicationserver;
-	//_alphabet.push_back("wrtie");
-	//_alphabet.push_back("read");
-	// commincationdriver
-	// fsm
-	// actions
-	// sesitiveActions
-	//
-}
 
 Process::~Process()
 {
@@ -72,12 +64,12 @@ std::vector<int> Process::getSensitivityList()
 	_sensitivityList.clear();
 	for(int i = 0; i < 2; i++)
 	{
-		printf("state: %d \n", _stateTable[i][_currentState]);
-		if(_stateTable[i][_currentState] != -1)
+		printf("state: %d \n", _stateTable2d[i][_currentState]);
+		if(_stateTable2d[i][_currentState] != -1)
 		{
-			_sensitivityList.push_back(_stateTable[i][_currentState]);
+			_sensitivityList.push_back(_stateTable2d[i][_currentState]);
 		}
 	}
 
-	return _stateTable;
+	return _sensitivityList;
 }
