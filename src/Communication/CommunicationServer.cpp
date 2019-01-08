@@ -15,11 +15,11 @@ CommunicationServer::~CommunicationServer()
 
 void CommunicationServer::init()
 {
-    createAlphabetTable();
+    createAlphabetTableHeader();
     fillAlphabetTable();
 }
 
-void CommunicationServer::createAlphabetTable()
+void CommunicationServer::createAlphabetTableHeader()
 {
     //add alphabet strings to first row of table
     _alphabetTable.clear();
@@ -28,25 +28,15 @@ void CommunicationServer::createAlphabetTable()
     {
         std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
 
-        if (_alphabetTable.empty())
+        for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
         {
-            _alphabetTable.push_back(alphabet);
-            continue;
-        }
-        else
-        {
-            for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
+            if (std::find(_alphabetTable.begin(), _alphabetTable.end(), alphabet.at(j)) != _alphabetTable.end())
             {
-                if (std::find(_alphabetTable.begin(), _alphabetTable.end(), alphabet.at(j)) != _alphabetTable.end())
-                {
-                    continue;
-                }
-                else
-                {
-                    _alphabetTable.push_back(alphabet.at(j));
-                }
-
-
+                continue;
+            }
+            else
+            {
+                _alphabetTable.push_back(alphabet.at(j));
             }
         }
     }
@@ -54,24 +44,13 @@ void CommunicationServer::createAlphabetTable()
 
 void CommunicationServer::fillAlphabetTable()
 {
-		for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
-    {
-        std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
-
-
-
-		}
-
-
-
 
     //print
     for (int i = 0; static_cast<size_t>(i) < _alphabetTable.size(); i++)
     {
-        for (int j = 0; static_cast<size_t>(j) < _alphabetTable.at(i).size(); j++)
-        {
-            std::cout << _alphabetTable.at(i).at(j) << " ";
-        }
+
+        std::cout << _alphabetTable.at(i) << " ";
+
         std::cout << '\n';
     }
 }

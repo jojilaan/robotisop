@@ -24,7 +24,7 @@ private:
 	std::vector<Process> _vProcesses;
 	std::vector<std::vector<int>> _stateTable;
 
-	void createAlphabetTable();
+	void createAlphabetTableHeader();
 	void fillAlphabetTable();
 };
 
