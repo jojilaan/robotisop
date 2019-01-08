@@ -37,14 +37,16 @@ void CommunicationServer::createAlphabetTable()
         {
             for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
             {
-                if (std::find(_alphabetTable.at(0).begin(), _alphabetTable.at(0).end(), alphabet.at(j)) != _alphabetTable.at(0).end())
+                if (std::find(_alphabetTable.begin(), _alphabetTable.end(), alphabet.at(j)) != _alphabetTable.end())
                 {
                     continue;
                 }
                 else
                 {
-                    _alphabetTable.at(0).push_back(alphabet.at(j));
+                    _alphabetTable.push_back(alphabet.at(j));
                 }
+
+
             }
         }
     }
@@ -52,6 +54,16 @@ void CommunicationServer::createAlphabetTable()
 
 void CommunicationServer::fillAlphabetTable()
 {
+		for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
+    {
+        std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
+
+
+
+		}
+
+
+
 
     //print
     for (int i = 0; static_cast<size_t>(i) < _alphabetTable.size(); i++)
