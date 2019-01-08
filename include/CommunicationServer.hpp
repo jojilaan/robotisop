@@ -17,15 +17,17 @@ public:
 	void init();
 
 	std::vector<std::vector<int>> GetStateTable();
-	std::string test;
 
 private:
-	std::vector<std::string> _alphabetTable;
+	std::vector<std::string> _allActions;
 	std::vector<Process> _vProcesses;
 	std::vector<std::vector<int>> _stateTable;
+    char **_lookUpTable;
 
 	void createAlphabetTableHeader();
-	void fillAlphabetTable();
+	void fillLookUpTable();
+	void createLookUpTable();
+
 };
 
 #endif /* MY_CLASS_H */

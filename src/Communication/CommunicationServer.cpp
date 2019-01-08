@@ -16,13 +16,14 @@ CommunicationServer::~CommunicationServer()
 void CommunicationServer::init()
 {
     createAlphabetTableHeader();
-    fillAlphabetTable();
+    createLookUpTable();
+    fillLookUpTable();
 }
 
 void CommunicationServer::createAlphabetTableHeader()
 {
     //add alphabet strings to first row of table
-    _alphabetTable.clear();
+    _allActions.clear();
     std::cout << _vProcesses.size();
     for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
     {
@@ -30,28 +31,50 @@ void CommunicationServer::createAlphabetTableHeader()
 
         for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
         {
-            if (std::find(_alphabetTable.begin(), _alphabetTable.end(), alphabet.at(j)) != _alphabetTable.end())
+            if (std::find(_allActions.begin(), _allActions.end(), alphabet.at(j)) != _allActions.end())
             {
                 continue;
             }
             else
             {
-                _alphabetTable.push_back(alphabet.at(j));
+                _allActions.push_back(alphabet.at(j));
             }
         }
     }
 }
-
-void CommunicationServer::fillAlphabetTable()
+void CommunicationServer::createLookUpTable()
 {
-
-    //print
-    for (int i = 0; static_cast<size_t>(i) < _alphabetTable.size(); i++)
+    _lookUpTable = new char *[_vProcesses.size()];
+    for (int i = 0; i < _vProcesses.size(); i++)
     {
+        _lookUpTable[i] = new char[_allActions.size()];
+    }
+}
 
-        std::cout << _alphabetTable.at(i) << " ";
-
-        std::cout << '\n';
+void CommunicationServer::fillLookUpTable()
+{
+    for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
+    {
+        std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
+        for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
+        {
+            if (std::find(alphabet.begin(), alphabet.end(), _allActions.at(j)) != alphabet.end())
+            {
+                _lookUpTable[i][j] = '1';
+            }
+            else
+            {
+                _lookUpTable[i][j] = '0';
+            }
+        }
+    }
+    for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
+    {
+        for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
+        {
+            std::cout << _lookUpTable[i][j];
+        }
+        std::cout << "\n";
     }
 }
 
