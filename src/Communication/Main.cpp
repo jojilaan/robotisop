@@ -71,7 +71,7 @@ int main()
 
   communicationserver.init();
   communicationserver.getSensitiveLists();
-
+  communicationserver.getNextPossibleActions();
 
 	return 1;
 }

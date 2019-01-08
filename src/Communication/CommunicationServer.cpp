@@ -2,6 +2,7 @@
 #include "Process.hpp"
 #include <iostream>
 #include <algorithm>
+#include <iterator> // std::iterator, std::input_iterator_tag
 
 CommunicationServer::CommunicationServer()
 {
@@ -24,6 +25,7 @@ void CommunicationServer::createAlphabetTableHeader()
 {
 	//add alphabet strings to first row of table
 	_allActions.clear();
+
 	std::cout << _vProcesses.size();
 	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
 	{
@@ -37,6 +39,8 @@ void CommunicationServer::createAlphabetTableHeader()
 			}
 			else
 			{
+				std::cout << "saddsaf" << alphabet.at(j);
+				_allActionsMap[alphabet.at(j)] = 0;
 				_allActions.push_back(alphabet.at(j));
 			}
 		}
@@ -60,6 +64,7 @@ void CommunicationServer::fillLookUpTable()
 		{
 			if (std::find(alphabet.begin(), alphabet.end(), _allActions.at(j)) != alphabet.end())
 			{
+				_allActionsMap[_allActions.at(j)]++;
 				_lookUpTable[i][j] = '1';
 			}
 			else
@@ -68,23 +73,29 @@ void CommunicationServer::fillLookUpTable()
 			}
 		}
 	}
-	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
+	//// print lookuptable
+	//for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
+	//{
+	//	for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
+	//	{
+	//		std::cout << _lookUpTable[i][j];
+	//	}
+	//	std::cout << "\n";
+	//}
+	// print allActionsMap
+	for (auto &x : _allActionsMap)
 	{
-		for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
-		{
-			std::cout << _lookUpTable[i][j];
-		}
-		std::cout << "\n";
+		std::cout << x.first << ": " << x.second << '\n';
+	}
+	for (int i=0; i< _allActions.size(); i++)
+	{
+		std::cout << _allActions.at(i) << " jajajaj" <<  '\n';
 	}
 }
 
 std::vector<std::vector<int>> CommunicationServer::GetStateTable()
 {
 	return _stateTable;
-}
-
-void CommunicationServer::addAlphabet(std::vector<std::string> alphabet)
-{
 }
 
 void CommunicationServer::addProcess(Process p)
@@ -124,16 +135,38 @@ void CommunicationServer::getNextPossibleActions()
 
 	for (auto proc : _vProcesses)
 	{
-		for (auto s : _map[proc.getName()])
+		for (auto s : proc.getSensitivityList())
 		{
-			if (std::find(nextPossibleActions.begin(), nextPossibleActions.end(), s) == nextPossibleActions.end())
+			//not found
+			if (nextPossibleActions.find(s) == nextPossibleActions.end())
 			{
 				nextPossibleActions.insert(std::pair<std::string, int>(s, 1));
+				nextPossibleActions.insert(std::pair<std::string, int>("read", 1));
 			}
-			else
+			else //found in map
 			{
 				nextPossibleActions[s]++;
 			}
 		}
+	}
+
+	// print allActionsMap
+	//for (auto &x : nextPossibleActions)
+	//{
+	//	std::cout << "next " << x.first << ": " << x.second << '\n';
+	//}
+	for (auto it = nextPossibleActions.cbegin(); it != nextPossibleActions.cend() /* not hoisted */; /* no increment */)
+	{
+	
+		if (_allActionsMap.find(it->first)->second != it->second)
+		{
+			nextPossibleActions.erase(it); 
+		}
+		++it;
+		
+	}
+	for (auto &x : nextPossibleActions)
+	{
+		std::cout << "next2 " << x.first << ": " << x.second << '\n';
 	}
 }

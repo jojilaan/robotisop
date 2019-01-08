@@ -6,7 +6,7 @@ Process::Process(std::string name, int **FSM, int states)
 	_name = name;
 	_nstates = states;
 	_FSM = FSM;
-	_currentState = 1;
+	_currentState = 0;
 	//_sensitivityList = NULL;
 }
 

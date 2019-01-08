@@ -10,7 +10,6 @@ class CommunicationServer
 public:
 	CommunicationServer();
 	~CommunicationServer();
-	void addAlphabet(std::vector<std::string>);
 	void addProcess(Process p);
 	void printProcesses();
 	void nextState(int);
@@ -25,8 +24,9 @@ private:
 	std::vector<std::vector<int>> _stateTable;
 	char **_lookUpTable;
 	std::unordered_map<std::string, std::vector<std::string>> _map;
-	std::map<std::string, int> nextPossibleActions;
-
+	std::unordered_map<std::string, int> nextPossibleActions;
+    std::unordered_map<std::string, int> _allActionsMap;
+	
 	void createAlphabetTableHeader();
 	void fillLookUpTable();
 	void createLookUpTable();
