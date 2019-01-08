@@ -5,6 +5,7 @@ Packet::Packet(unsigned char id, instruction inst, unsigned char address)
 	_id = id;
 	_inst = inst;
 	_address = address;
+	build();
 }
 
 Packet::Packet(unsigned char id, instruction inst, unsigned char address, int value)
@@ -14,6 +15,7 @@ Packet::Packet(unsigned char id, instruction inst, unsigned char address, int va
 	_address = address;
 	_value = static_cast<unsigned char>(value & 0xff);
 	_value2 = static_cast<unsigned char>((value & 0xff00) >> 8);
+	build();
 }
 
 Packet::~Packet()

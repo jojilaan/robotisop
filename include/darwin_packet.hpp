@@ -18,7 +18,6 @@ public:
 	Packet(unsigned char id, instruction inst, unsigned char address, int value);
 	~Packet();
 
-	void build();
 	unsigned char *getTxPacket();
 	unsigned char *getRxPacket();
 	static unsigned char calculateChecksum(unsigned char *p);
@@ -32,6 +31,8 @@ private:
 	unsigned char _value;
 	unsigned char _value2;
 	unsigned char _length;
+
+	void build();
 };
 
 #endif
