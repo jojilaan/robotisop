@@ -87,11 +87,11 @@ int main()
   proc.printAlphabet();
   //printf("State\n");
   //proc.printStates();
-  std::vector<int> a = proc.getSensitivityList();
-  for (std::vector<int>::const_iterator i = a.begin(); i != a.end(); i++)
-  {
-    std::cout << "Sensitive for: " << *i << '.' << states_text[*i-1] << "\n" ;
-  }
+  std::vector<std::string> a = proc.getSensitivityList();
+  //for (std::vector<int>::const_iterator i = a.begin(); i != a.end(); i++)
+  //{
+  //  std::cout << "Sensitive for: " << *i << '.' << states_text[*i-1] << "\n" ;
+  //}
   
 
   Process proc2("Proc2", arrProcB, 3);
@@ -101,10 +101,10 @@ int main()
   communicationserver.addProcess(proc2);
   //communicationserver.printProcesses();
   a = proc2.getSensitivityList();
-  for (std::vector<int>::const_iterator i = a.begin(); i != a.end(); i++)
-  {
-    std::cout << "Sensitive for: " << *i << '.' << states_text[*i-1] << "\n" ;
-  }
-
+  //for (std::vector<int>::const_iterator i = a.begin(); i != a.end(); i++)
+  //{
+  //  std::cout << "Sensitive for: " << *i << '.' << states_text[*i-1] << "\n" ;
+  //}
+//
   return 1;
 }

@@ -1,12 +1,12 @@
 #include "Process.hpp"
 #include <iostream>
 
-Process::Process(std::string name, int **stateTable, int states)
+Process::Process(std::string name, int **FSM, int states)
 {
 	_name = name;
-	_states = states;
-	_stateTable = stateTable;
-	_currentState = 0;
+	_nstates = states;
+	_FSM = FSM;
+	_currentState = 1;
 	//_sensitivityList = NULL;
 }
 
@@ -49,12 +49,12 @@ std::string Process::getName()
 std::vector<std::string> Process::getSensitivityList()
 {
 	_sensitivityList.clear();
-	for (int i = 0; i < _states; i++)
+	for (int i = 0; i < _nstates; i++)
 	{
-		printf("state: %d \n", _stateTable[i][_currentState]);
-		if (_stateTable[i][_currentState] != -1)
+		//printf("state: %d \n", _FSM[i][_currentState]);
+		if (_FSM[i][_currentState] != -1)
 		{
-			std::cout << _alphabet[i];
+			std::cout << _name << " is sensitive for: " <<_alphabet[i] << '\n';
 			//_sensitivityList.push_back(_stateTable[i][_currentState]);
 
 			_sensitivityList.push_back(_alphabet[i]);
