@@ -146,7 +146,7 @@ bool Connection::transferPacket(Packet& packet)
 	unsigned char *txpacket = packet.getTxPacket();
 	unsigned char *rxpacket = packet.getRxPacket();
 	bool res = false;
-	int length = txpacket[3] + 4;
+	int length = txpacket[PACKET_LENGTH] + 4;
 
 	txpacket[length - 1] = Packet::calculateChecksum(txpacket);
 
@@ -158,9 +158,9 @@ bool Connection::transferPacket(Packet& packet)
 		{
 			int to_length = 0;
 
-			if (txpacket[4] == Packet::READ)
+			if (txpacket[PACKET_INSTRUCTION] == Packet::READ)
 			{
-				to_length = txpacket[6] + 6;
+				to_length = txpacket[PACKET_VALUE] + 6;
 			}
 			else
 			{
