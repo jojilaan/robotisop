@@ -102,3 +102,18 @@ void CommunicationServer::printProcesses()
     }
     printf("\n");
 }
+
+void CommunicationServer::getSensitiveLists()
+{
+    for (auto proc : _vProcesses)
+    {
+        _map[proc.getName()] = proc.getSensitivityList();
+        // print
+        //for(auto sL : _map[proc.getName()] )
+        //{
+        //    std::cout << "test  " << sL;
+        //}
+        //printf("\n");
+    }
+    //printf("\n");
+}

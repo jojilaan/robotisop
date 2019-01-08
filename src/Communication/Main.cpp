@@ -64,11 +64,13 @@ int main()
 	alphabet.push_back("b.wait");
 	Process proc2("Proc2", arrProcB, 3);
 	proc2.addAlphabet(alphabet);
-
-	communicationserver.addProcess(proc);
+  std::vector<std::string> sensitve = proc2.getSensitivityList();
+  
+  communicationserver.addProcess(proc);
 	communicationserver.addProcess(proc2);
 
   communicationserver.init();
+  communicationserver.getSensitiveLists();
 
 
 	return 1;
