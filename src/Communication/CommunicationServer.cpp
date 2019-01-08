@@ -1,62 +1,72 @@
 #include "CommunicationServer.hpp"
 #include "Process.hpp"
 #include <iostream>
+#include <algorithm>
 
 CommunicationServer::CommunicationServer()
 {
-	//std::vector<std::vector<int>> stateTable;
-	//_stateTable.push_back(p);
+    //std::vector<std::vector<int>> stateTable;
+    //_stateTable.push_back(p);
 }
 
 CommunicationServer::~CommunicationServer()
 {
 }
 
-void init()
+void CommunicationServer::init()
 {
-	createAlphabetTable();
-	fillAlphabetTable();
+    createAlphabetTable();
+    fillAlphabetTable();
 }
 
-void createAlphabetTable()
+void CommunicationServer::createAlphabetTable()
 {
-	//add alphabet strings to first row of table
-	alphabetTable.clear();
-	for (int i = 0; i < _vProcesses.size(); ++i)
-	{
-		std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
+    //add alphabet strings to first row of table
+    _alphabetTable.clear();
+    std::cout << _vProcesses.size();
+    for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
+    {
+        std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
 
-		if (_alphabetTable.empty())
-		{
-			_alphabetTable.push_back(alphabet);
-			continue;
-		}
-		else
-		{
-			for (int j = 0; j < alphabet.size(); ++j)
-			{
-				if (alphabet.at(j) == _alphabetTable.at(0).at(j))
-				{
-					continue;
-				}
-				else
-				{
-					_alphabetTable.at(0).push_back(alphabet.at(j));
-				}
-			}
-
-		}
-	}
+        if (_alphabetTable.empty())
+        {
+            _alphabetTable.push_back(alphabet);
+            continue;
+        }
+        else
+        {
+            for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
+            {
+                if (std::find(_alphabetTable.at(0).begin(), _alphabetTable.at(0).end(), alphabet.at(j)) != _alphabetTable.at(0).end())
+                {
+                    continue;
+                }
+                else
+                {
+                    _alphabetTable.at(0).push_back(alphabet.at(j));
+                }
+            }
+        }
+    }
 }
 
-void fillAlphabetTable
+void CommunicationServer::fillAlphabetTable()
 {
 
+    //print
+    for (int i = 0; static_cast<size_t>(i) < _alphabetTable.size(); i++)
+    {
+        for (int j = 0; static_cast<size_t>(j) < _alphabetTable.at(i).size(); j++)
+        {
+            std::cout << _alphabetTable.at(i).at(j) << " ";
+        }
+        std::cout << '\n';
+    }
 }
 
 std::vector<std::vector<int>> CommunicationServer::GetStateTable()
 {
-	return _stateTable;
+    return _stateTable;
 }
 
 void CommunicationServer::addAlphabet(std::vector<std::string> alphabet)
@@ -65,16 +75,16 @@ void CommunicationServer::addAlphabet(std::vector<std::string> alphabet)
 
 void CommunicationServer::addProcess(Process p)
 {
-	_vProcesses.push_back(p);
+    _vProcesses.push_back(p);
 }
 
 void CommunicationServer::printProcesses()
 {
-	// ADD to yourself
-	for (auto proc : _vProcesses)
-	{
-		std::cout << proc.getName();
-		//printf("%s, ", alpha);
-	}
-	printf("\n");
+    // ADD to yourself
+    for (auto proc : _vProcesses)
+    {
+        std::cout << proc.getName();
+        //printf("%s, ", alpha);
+    }
+    printf("\n");
 }

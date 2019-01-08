@@ -20,7 +20,7 @@ public:
 	std::string test;
 
 private:
-	std::vector<std::vector<String>> _alphabetTable;
+	std::vector<std::vector<std::string>> _alphabetTable;
 	std::vector<Process> _vProcesses;
 	std::vector<std::vector<int>> _stateTable;
 

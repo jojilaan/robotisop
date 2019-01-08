@@ -15,29 +15,6 @@ enum class states
 
 int **arrProcA;
 int **arrProcB;
-
-int main()
-{
-	CommunicationServer communicationserver;
-	std::vector<std::string> alphabet;
-	alphabet.push_back("write");
-	alphabet.push_back("read");
-
-	Process proc("proca", arrProcA, 2);
-	proc.addAlphabet(alphabet);
-	printf("Alphabet:\n");
-	proc.printAlphabet();
-
-	alphabet.push_back("b.wait");
-	Process proc2("Proc2", arrProcB, 3);
-	proc2.addAlphabet(alphabet);
-
-	communicationserver.addProcess(proc);
-	communicationserver.addProcess(proc2);
-
-	return 1;
-}
-
 void initProcs()
 {
 	// arr ProcA //////////////////
@@ -69,3 +46,32 @@ void initProcs()
 	arrProcB[2][2] = 0;
 	// arr ProcB //////////////////
 }
+
+int main()
+{
+	CommunicationServer communicationserver;
+	std::vector<std::string> alphabet;
+	alphabet.push_back("write");
+	alphabet.push_back("read");
+
+  initProcs();
+
+	Process proc("proca", arrProcA, 2);
+	proc.addAlphabet(alphabet);
+	printf("Alphabet:\n");
+	proc.printAlphabet();
+
+	alphabet.push_back("b.wait");
+	Process proc2("Proc2", arrProcB, 3);
+	proc2.addAlphabet(alphabet);
+
+	communicationserver.addProcess(proc);
+	communicationserver.addProcess(proc2);
+
+  communicationserver.init();
+
+
+	return 1;
+}
+
+

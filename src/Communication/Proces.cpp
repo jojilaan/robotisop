@@ -28,10 +28,10 @@ void Process::printAlphabet()
 	{
 		std::cout << alpha << ' ';
 	}
-	std::cout << '\n'
+	std::cout << '\n';
 }
 
-std::vector<std::string> getAlphabet
+std::vector<std::string> Process::getAlphabet()
 {
 	return _alphabet;
 }
