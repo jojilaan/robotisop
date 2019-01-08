@@ -17,20 +17,19 @@ public:
 	void init();
 	void getSensitiveLists();
 	std::vector<std::vector<int>> GetStateTable();
+	void getNextPossibleActions();
 
 private:
 	std::vector<std::string> _allActions;
 	std::vector<Process> _vProcesses;
 	std::vector<std::vector<int>> _stateTable;
-    char **_lookUpTable;
+	char **_lookUpTable;
 	std::unordered_map<std::string, std::vector<std::string>> _map;
+	std::map<std::string, int> nextPossibleActions;
 
 	void createAlphabetTableHeader();
 	void fillLookUpTable();
 	void createLookUpTable();
-	
-
-
 };
 
 #endif /* MY_CLASS_H */
