@@ -7,21 +7,25 @@
 
 class CommunicationServer
 {
-	public:
+public:
 	CommunicationServer();
 	~CommunicationServer();
 	void addAlphabet(std::vector<std::string>);
-	void addProcess(Process p); 
+	void addProcess(Process p);
 	void printProcesses();
-    void nextState(int); 
-	
+	void nextState(int);
+	void init();
+
 	std::vector<std::vector<int>> GetStateTable();
 	std::string test;
 
-	private:
+private:
+	std::vector<std::vector<String>> _alphabetTable;
 	std::vector<Process> _vProcesses;
-	std::vector<std::vector<int>> _stateTable; 
+	std::vector<std::vector<int>> _stateTable;
 
+	void createAlphabetTable();
+	void fillAlphabetTable();
 };
 
 #endif /* MY_CLASS_H */

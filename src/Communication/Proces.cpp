@@ -20,25 +20,20 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
 	{
 		_alphabet.push_back(alpha);
 	}
-
-	// ADD to yourself
-	//_alphabet = alphabet;
-	//std::map<int, std::string> _m;
-  //_m[1] = "Write man\n";
-	//std::cout << _m[1];
-	// Add to communicationServer;
-	//_communicationserver.addAlphabet(_alphabet);
 }
 
 void Process::printAlphabet()
 {
-	// ADD to yourself
 	for (const auto alpha : _alphabet)
 	{
 		std::cout << alpha << ' ';
-		//printf("%s , ", alpha);
 	}
-	printf("\n");
+	std::cout << '\n'
+}
+
+std::vector<std::string> getAlphabet
+{
+	return _alphabet;
 }
 
 std::string Process::getName()

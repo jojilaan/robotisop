@@ -23,6 +23,7 @@ public:
 	void addAlphabet(std::vector<std::string> alpahbet);
 	void printAlphabet();
 	std::string getName();
+	std::vector<std::string> getAlphabet();
 	std::vector<std::string> getSensitivityList();
 
 private:
