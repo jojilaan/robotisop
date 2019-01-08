@@ -25,6 +25,8 @@ public:
 	std::string getName();
 	std::vector<std::string> getAlphabet();
 	std::vector<std::string> getSensitivityList();
+	void makeTransition(std::string trans);
+
 
 private:
 	int **_FSM;

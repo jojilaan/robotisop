@@ -54,26 +54,38 @@ int main()
 	alphabet.push_back("write");
 	alphabet.push_back("read");
 
-  initProcs();
+	initProcs();
 
 	Process proc("proca", arrProcA, 2);
 	proc.addAlphabet(alphabet);
-	printf("Alphabet:\n");
-	proc.printAlphabet();
+	//printf("Alphabet:\n");
+	//proc.printAlphabet();
 
 	alphabet.push_back("b.wait");
 	Process proc2("Proc2", arrProcB, 3);
 	proc2.addAlphabet(alphabet);
-  std::vector<std::string> sensitve = proc2.getSensitivityList();
-  
-  communicationserver.addProcess(proc);
+
+	communicationserver.addProcess(proc);
 	communicationserver.addProcess(proc2);
 
-  communicationserver.init();
-  communicationserver.getSensitiveLists();
-  communicationserver.getNextPossibleActions();
+	communicationserver.init();
+	communicationserver.getSensitiveLists();
+	communicationserver.getNextPossibleActions();
+
+	// start loop here
+	//while (true)
+	//{
+		
+		// enter number 
+		int i;
+		std::cout << "Please enter an integer value: ";
+		std::cin >> i;
+		// make transistion 
+		communicationserver.makeTransition("write");
+		communicationserver.getSensitiveLists();
+		// getNextPossibleActions()
+		communicationserver.getNextPossibleActions();
+	//}
 
 	return 1;
 }
-
-

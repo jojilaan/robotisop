@@ -17,6 +17,7 @@ public:
 	void getSensitiveLists();
 	std::vector<std::vector<int>> GetStateTable();
 	void getNextPossibleActions();
+	void makeTransition(std::string trans);
 
 private:
 	std::vector<std::string> _allActions;
@@ -26,7 +27,7 @@ private:
 	std::unordered_map<std::string, std::vector<std::string>> _map;
 	std::unordered_map<std::string, int> nextPossibleActions;
     std::unordered_map<std::string, int> _allActionsMap;
-	
+
 	void createAlphabetTableHeader();
 	void fillLookUpTable();
 	void createLookUpTable();

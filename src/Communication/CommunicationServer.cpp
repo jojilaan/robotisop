@@ -39,7 +39,6 @@ void CommunicationServer::createAlphabetTableHeader()
 			}
 			else
 			{
-				std::cout << "saddsaf" << alphabet.at(j);
 				_allActionsMap[alphabet.at(j)] = 0;
 				_allActions.push_back(alphabet.at(j));
 			}
@@ -83,14 +82,14 @@ void CommunicationServer::fillLookUpTable()
 	//	std::cout << "\n";
 	//}
 	// print allActionsMap
-	for (auto &x : _allActionsMap)
-	{
-		std::cout << x.first << ": " << x.second << '\n';
-	}
-	for (int i=0; i< _allActions.size(); i++)
-	{
-		std::cout << _allActions.at(i) << " jajajaj" <<  '\n';
-	}
+	//for (auto &x : _allActionsMap)
+	//{
+	//	std::cout << x.first << ": " << x.second << '\n';
+	//}
+	//for (int i=0; i< _allActions.size(); i++)
+	//{
+	//	std::cout << _allActions.at(i) << " jajajaj" <<  '\n';
+	//}
 }
 
 std::vector<std::vector<int>> CommunicationServer::GetStateTable()
@@ -105,11 +104,9 @@ void CommunicationServer::addProcess(Process p)
 
 void CommunicationServer::printProcesses()
 {
-	// ADD to yourself
 	for (auto proc : _vProcesses)
 	{
 		std::cout << proc.getName();
-		//printf("%s, ", alpha);
 	}
 	printf("\n");
 }
@@ -118,6 +115,12 @@ void CommunicationServer::getSensitiveLists()
 {
 	for (auto proc : _vProcesses)
 	{
+		std::vector<std::string> kp = proc.getSensitivityList();
+		for (auto p : kp)
+		{
+			std::cout << p << " hjgkjggk";
+		}
+		std::cout << " \n";
 		_map[proc.getName()] = proc.getSensitivityList();
 		// print
 		//for(auto sL : _map[proc.getName()] )
@@ -157,16 +160,31 @@ void CommunicationServer::getNextPossibleActions()
 	//}
 	for (auto it = nextPossibleActions.cbegin(); it != nextPossibleActions.cend() /* not hoisted */; /* no increment */)
 	{
-	
+
 		if (_allActionsMap.find(it->first)->second != it->second)
 		{
-			nextPossibleActions.erase(it); 
+			nextPossibleActions.erase(it);
 		}
 		++it;
-		
 	}
 	for (auto &x : nextPossibleActions)
 	{
-		std::cout << "next2 " << x.first << ": " << x.second << '\n';
+		std::cout << "Choose: " << x.first << '\n';
+	}
+}
+
+void CommunicationServer::makeTransition(std::string trans)
+{
+	for (auto proc : _vProcesses)
+	{
+		std::vector<std::string> a = _map[proc.getName()];
+		for (auto const &value : a)
+		{
+			if (value == trans)
+			{
+				std::cout << "Update " << proc.getName();
+				proc.makeTransition(value);
+			}
+		}
 	}
 }
