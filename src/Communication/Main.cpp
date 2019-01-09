@@ -13,56 +13,157 @@ enum class states
 	ERROR = -1
 };
 
-int **arrProcA;
-int **arrProcB;
+int **LSchouderP;
+int **RschouderP;
+int **LschouderR;
+int **RschouderR;
+int **Lelleboog;
+int **Relleboog;
+int **ToReady;
+
 void initProcs()
 {
 	// arr ProcA //////////////////
-	arrProcA = new int *[2];
+	LSchouderP = new int *[2];
 	for (int i = 0; i < 2; i++)
 	{
-		arrProcA[i] = new int[2];
+		LSchouderP[i] = new int[2];
 	}
-	arrProcA[0][0] = 1;
-	arrProcA[0][1] = -1;
-	arrProcA[1][0] = -1;
-	arrProcA[1][1] = 0;
-	// arr ProcA //////////////////
-	// arr ProcB //////////////////
-	arrProcB = new int *[2];
-	for (int i = 0; i < 2; i++)
-	{
-		arrProcB[i] = new int[2];
-	}
-	arrProcB[0][0] = 1;
-	arrProcB[0][1] = -1;
-	arrProcB[1][0] = -1;
-	arrProcB[1][1] = 0;
-	// arr ProcB //////////////////
+	LSchouderP[0][0] = 1;
+	LSchouderP[0][1] = -1;
+	LSchouderP[1][0] = -1;
+	LSchouderP[1][1] = 0;
 
+	RSchouderP = new int *[2];
+	for (int i = 0; i < 2; i++)
+	{
+		RSchouderP[i] = new int[2];
+	}
+	RSchouderP[0][0] = 1;
+	RSchouderP[0][1] = -1;
+	RSchouderP[1][0] = -1;
+	RSchouderP[1][1] = 0;
+
+	LSchouderR = new int *[2];
+	for (int i = 0; i < 2; i++)
+	{
+		LSchouderR[i] = new int[2];
+	}
+	LSchouderR[0][0] = 1;
+	LSchouderR[0][1] = -1;
+	LSchouderR[1][0] = -1;
+	LSchouderR[1][1] = 0;
+
+	RSchouderP = new int *[2];
+	for (int i = 0; i < 2; i++)
+	{
+		RSchouderP[i] = new int[2];
+	}
+	RSchouderP[0][0] = 1;
+	RSchouderP[0][1] = -1;
+	RSchouderP[1][0] = -1;
+	RSchouderP[1][1] = 0;
+
+	Lelleboog = new int *[2];
+	for (int i = 0; i < 2; i++)
+	{
+		Lelleboog[i] = new int[2];
+	}
+	Lelleboog[0][0] = 1;
+	Lelleboog[0][1] = -1;
+	Lelleboog[1][0] = -1;
+	Lelleboog[1][1] = 0;
+
+	Relleboog = new int *[2];
+	for (int i = 0; i < 2; i++)
+	{
+		Relleboog[i] = new int[2];
+	}
+	Relleboog[0][0] = 1;
+	Relleboog[0][1] = -1;
+	Relleboog[1][0] = -1;
+	Relleboog[1][1] = 0;
+
+	ToReady = new int *[6];
+	for (int i = 0; i < 6; i++)
+	{
+		Relleboog[i] = new int[7];
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			ToReady[i][j] = -1;
+		}
+	}
+
+	ToReady[0][5] = 1;
+	ToReady[1][0] = 2;
+	ToReady[2][1] = 3;
+	ToReady[2][2] = 4;
+	ToReady[3][6] = 0;
+	ToReady[4][4] = 5;
+	ToReady[5][3] = 2;
 }
 
 int main()
 {
 	CommunicationServer communicationserver;
-	std::vector<std::string> alphabet;
-	alphabet.push_back("make");
-	alphabet.push_back("ready");
-
 	initProcs();
-	//maybe alphabet.size() can be buggy, need research 
-	Process proc("Maker", arrProcA, alphabet.size());
-	proc.addAlphabet(alphabet);
-	//printf("Alphabet:\n");
-	//proc.printAlphabet();
-	alphabet.clear();
-	alphabet.push_back("ready");
-	alphabet.push_back("use");
-	Process proc2("User", arrProcB, alphabet.size());
-	proc2.addAlphabet(alphabet);
+	std::vector<Process> procs;
+	std::vector<std::string> alphabet;
+	alphabet.push_back("schouderPomhoog");
+	alphabet.push_back("schouderPomlaag");
 
-	communicationserver.addProcess(&proc);
-	communicationserver.addProcess(&proc2);
+	//maybe alphabet.size() can be buggy, need research
+	Process proc("LSchouderP", RSchouderP, alphabet.size());
+	proc.addAlphabet(alphabet);
+	procs.push_back(proc);
+
+	Process proc2("RschouderP", RschouderP, alphabet.size());
+	proc2.addAlphabet(alphabet);
+	procs.push_back(proc2);
+
+	alphabet.clear();
+	alphabet.push_back("schouderRomhoog");
+	alphabet.push_back("schouderRomlaag");
+	Process proc3("LschouderR", LschouderR, alphabet.size());
+	proc3.addAlphabet(alphabet);
+	procs.push_back(proc3);
+
+	Process proc4("RschouderR", RschouderR, alphabet.size());
+	proc4.addAlphabet(alphabet);
+	procs.push_back(proc4);
+
+	alphabet.clear();
+	alphabet.push_back("ellebogOmhoog");
+	alphabet.push_back("elleboogOmlaag");
+	Process proc5("Lelleboog", Lelleboog, alphabet.size());
+	proc5.addAlphabet(alphabet);
+	procs.push_back(proc5);
+
+	Process proc6("Relleboog", Relleboog, alphabet.size());
+	proc6.addAlphabet(alphabet);
+	procs.push_back(proc6);
+
+	alphabet.clear();
+	alphabet.push_back("elleboogOmhoog");
+	alphabet.push_back("elleboogOmlaag");
+	alphabet.push_back("klappen");
+	alphabet.push_back("schouderBinnen");
+	alphabet.push_back("schouderBuiten");
+	alphabet.push_back("schouderOmhoog");
+	alphabet.push_back("schouderOmlaag");
+
+	Process proc7("ToReady", ToReady, alphabet.size());
+	proc7.addAlphabet(alphabet);
+	procs.push_back(proc7);
+
+	for(auto& proc : procs)
+	{
+		CommunicationServer.addProcess(proc);
+	}
 
 	communicationserver.init();
 	communicationserver.getSensitiveLists();
@@ -70,14 +171,14 @@ int main()
 
 	// start loop here
 	while (true)
-	{	
-		// enter number 
-		std::string input = ""; 
+	{
+		// enter number
+		std::string input = "";
 		std::cout << "Please enter an string value: ";
-		getline(std::cin, input); 
+		getline(std::cin, input);
 		//std::cin >> i;
-		// make transistion 
-		//std::cout << input; 
+		// make transistion
+		//std::cout << input;
 		communicationserver.makeTransition(input);
 		communicationserver.getSensitiveLists();
 
