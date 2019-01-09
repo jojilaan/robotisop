@@ -18,7 +18,6 @@ class Process
 {
 public:
 	Process(std::string name, int **FSM, int states);
-	//Process(std::string name, std::array<std::array<int, 3>, 3> stateTable);
 	~Process();
 	void addAlphabet(std::vector<std::string> alpahbet);
 	void printAlphabet();
@@ -35,8 +34,6 @@ private:
 	std::vector<std::string> _alphabet;
 	std::vector<std::string> _sensitivityList;
 	std::string _name;
-	std::map<int, std::string> _m;
-
 };
 
 #endif

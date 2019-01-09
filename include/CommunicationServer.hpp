@@ -21,12 +21,12 @@ public:
 
 private:
 	std::vector<std::string> _allActions;
-	std::vector<Process*> _vProcesses;
-	std::vector<std::vector<int>> _stateTable;
+	std::vector<Process *> _vProcesses;
+	//std::vector<std::vector<int>> _stateTable;
 	char **_lookUpTable;
 	std::unordered_map<std::string, std::vector<std::string>> _map;
 	std::unordered_map<std::string, int> nextPossibleActions;
-    std::unordered_map<std::string, int> _allActionsMap;
+	std::unordered_map<std::string, int> _allActionsMap;
 
 	void createAlphabetTableHeader();
 	void fillLookUpTable();
