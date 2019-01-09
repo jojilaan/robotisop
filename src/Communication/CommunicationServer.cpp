@@ -29,7 +29,7 @@ void CommunicationServer::createAlphabetTableHeader()
 	std::cout << _vProcesses.size();
 	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
 	{
-		std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
+		std::vector<std::string> alphabet = _vProcesses.at(i)->getAlphabet();
 
 		for (int j = 0; static_cast<size_t>(j) < alphabet.size(); ++j)
 		{
@@ -58,7 +58,7 @@ void CommunicationServer::fillLookUpTable()
 {
 	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
 	{
-		std::vector<std::string> alphabet = _vProcesses.at(i).getAlphabet();
+		std::vector<std::string> alphabet = _vProcesses.at(i)->getAlphabet();
 		for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
 		{
 			if (std::find(alphabet.begin(), alphabet.end(), _allActions.at(j)) != alphabet.end())
@@ -97,7 +97,7 @@ std::vector<std::vector<int>> CommunicationServer::GetStateTable()
 	return _stateTable;
 }
 
-void CommunicationServer::addProcess(Process p)
+void CommunicationServer::addProcess(Process *p)
 {
 	_vProcesses.push_back(p);
 }
@@ -106,7 +106,7 @@ void CommunicationServer::printProcesses()
 {
 	for (auto proc : _vProcesses)
 	{
-		std::cout << proc.getName();
+		std::cout << proc->getName();
 	}
 	printf("\n");
 }
@@ -115,13 +115,13 @@ void CommunicationServer::getSensitiveLists()
 {
 	for (auto proc : _vProcesses)
 	{
-		std::vector<std::string> kp = proc.getSensitivityList();
+		std::vector<std::string> kp = proc->getSensitivityList();
 		for (auto p : kp)
 		{
 			std::cout << p << " hjgkjggk";
 		}
 		std::cout << " \n";
-		_map[proc.getName()] = proc.getSensitivityList();
+		_map[proc->getName()] = proc->getSensitivityList();
 		// print
 		//for(auto sL : _map[proc.getName()] )
 		//{
@@ -138,7 +138,7 @@ void CommunicationServer::getNextPossibleActions()
 
 	for (auto proc : _vProcesses)
 	{
-		for (auto s : proc.getSensitivityList())
+		for (auto s : proc->getSensitivityList())
 		{
 			//not found
 			if (nextPossibleActions.find(s) == nextPossibleActions.end())
@@ -177,13 +177,13 @@ void CommunicationServer::makeTransition(std::string trans)
 {
 	for (auto proc : _vProcesses)
 	{
-		std::vector<std::string> a = _map[proc.getName()];
+		std::vector<std::string> a = _map[proc->getName()];
 		for (auto const &value : a)
 		{
 			if (value == trans)
 			{
-				std::cout << "Update " << proc.getName();
-				proc.makeTransition(value);
+				std::cout << "Update " << proc->getName();
+				proc->makeTransition(value);
 			}
 		}
 	}

@@ -65,8 +65,8 @@ int main()
 	Process proc2("Proc2", arrProcB, 3);
 	proc2.addAlphabet(alphabet);
 
-	communicationserver.addProcess(proc);
-	communicationserver.addProcess(proc2);
+	communicationserver.addProcess(&proc);
+	communicationserver.addProcess(&proc2);
 
 	communicationserver.init();
 	communicationserver.getSensitiveLists();

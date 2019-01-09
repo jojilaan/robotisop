@@ -10,7 +10,7 @@ class CommunicationServer
 public:
 	CommunicationServer();
 	~CommunicationServer();
-	void addProcess(Process p);
+	void addProcess(Process *p);
 	void printProcesses();
 	void nextState(int);
 	void init();
@@ -21,7 +21,7 @@ public:
 
 private:
 	std::vector<std::string> _allActions;
-	std::vector<Process> _vProcesses;
+	std::vector<Process*> _vProcesses;
 	std::vector<std::vector<int>> _stateTable;
 	char **_lookUpTable;
 	std::unordered_map<std::string, std::vector<std::string>> _map;
