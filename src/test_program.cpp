@@ -41,13 +41,13 @@ int main()
 		return -1;
 	}
 
-	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	packet = Packet(ID_R_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
