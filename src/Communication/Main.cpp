@@ -123,33 +123,28 @@ int main()
 	CommunicationServer communicationserver;
 
 	initProcs();
-	std::cout << " hello\n " ; 
 	std::vector<Process> procs;
 	std::vector<std::string> alphabet;
 	alphabet.push_back("schouderPomhoog");
 	alphabet.push_back("schouderPomlaag");
 
 	//maybe alphabet.size() can be buggy, need research
-	std::cout << "proc1 " << alphabet.size();
 	Process proc("LSchouderP", LSchouderP, alphabet.size());
 	proc.addAlphabet(alphabet);
 
 	procs.push_back(proc);
 
 	Process proc2("RSchouderP", RSchouderP, alphabet.size());
-	std::cout << "proc2 " << alphabet.size();
 	proc2.addAlphabet(alphabet);
 	procs.push_back(proc2);
 
 	alphabet.clear();
 	alphabet.push_back("schouderRomhoog");
 	alphabet.push_back("schouderRomlaag");
-	std::cout << "proc3 " << alphabet.size();
 	Process proc3("LSchouderR", LSchouderR, alphabet.size());
 	proc3.addAlphabet(alphabet);
 	procs.push_back(proc3);
 
-	std::cout << "proc4 " << alphabet.size();
 	Process proc4("RSchouderR", RSchouderR, alphabet.size());
 	proc4.addAlphabet(alphabet);
 	procs.push_back(proc4);
@@ -157,12 +152,10 @@ int main()
 	alphabet.clear();
 	alphabet.push_back("elleboogOmhoog");
 	alphabet.push_back("elleboogOmlaag");
-	std::cout << "proc5 " << alphabet.size();
 	Process proc5("Lelleboog", Lelleboog, alphabet.size());
 	proc5.addAlphabet(alphabet);
 	procs.push_back(proc5);
 
-	std::cout << "proc6 " << alphabet.size();
 	Process proc6("Relleboog", Relleboog, alphabet.size());
 	proc6.addAlphabet(alphabet);
 	procs.push_back(proc6);
@@ -175,7 +168,6 @@ int main()
 	alphabet.push_back("schouderRomhoog");
 	alphabet.push_back("schouderRomlaag");
 	
-	std::cout << "proc7 ";
 	Process proc7("ToReady", ToReady, 6);
 	proc7.addAlphabet(alphabet);
 	procs.push_back(proc7);

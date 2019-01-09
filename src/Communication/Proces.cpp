@@ -23,7 +23,7 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
 	{
 		_alphabet.push_back(alpha);
 	}
-	printAlphabet();
+	//printAlphabet();
 }
 
 void Process::printAlphabet()
@@ -48,10 +48,9 @@ std::string Process::getName()
 std::vector<std::string> Process::getSensitivityList()
 {
 	_sensitivityList.clear();
-	for (int i = 0; i < _nstates; ++i)
+	for (int i = 0; i < _alphabet.size(); ++i)
 	{
-
-		if (_FSM[i][_currentState] != -1)
+		if (_FSM[_currentState][i] != -1)
 		{
 			_sensitivityList.push_back(_alphabet.at(i));
 		}
@@ -71,8 +70,8 @@ void Process::makeTransition(std::string trans)
 	{
 		z = std::distance(_alphabet.begin(), it);
 	}
-	int nextState = _FSM[z][_currentState]; 
+	int nextState = _FSM[_currentState][z]; 
 	//std::cout << " next state " << nextState << '\n';
 	_currentState = nextState; 
-	std::cout << " curentState " << _currentState << '\n';
+	//std::cout << " curentState " << _currentState << '\n';
 }
