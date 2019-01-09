@@ -25,40 +25,45 @@ int main()
 {
 	Connection connection = Connection("/dev/ttyUSB0");
 	connection.openConnection();
-
-	// DXL power on
-	Packet packet = Packet(200, Packet::WRITE, 24, static_cast<unsigned char>(1));
+	Packet packet = Packet(ID_CM, Packet::WRITE, P_DXL_POWER, static_cast<unsigned char>(1));
 	if (connection.transferPacket(packet))
 	{
 		std::cout << "SUCCES" << std::endl;
-		packet = Packet(200, Packet::WRITEW, 26, (int)((((0 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((255 & 0xFF) >> 3)));
+		packet = Packet(ID_CM, Packet::WRITEW, P_LED_HEAD_L, (int)((((0 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((255 & 0xFF) >> 3)));
 		connection.transferPacket(packet);
 
 		sleepCustom(300);
 	}
+	else
+	{
+		std::cout << "DXL Power on failed" << std::endl;
+		connection.closeConnection();
+		return -1;
+	}
 
-	// Left arm
-	packet = Packet(2, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(4, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(6, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	// Right arm
-	packet = Packet(1, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(3, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-	packet = Packet(5, Packet::WRITE, 28, static_cast<unsigned char>(8));
+	packet = Packet(ID_L_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
+
+	usleep(50000);
 
 	connection.closeConnection();
+
 	return 0;
 }

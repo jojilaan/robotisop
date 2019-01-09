@@ -26,30 +26,30 @@ void Packet::build()
 {
 	_txpacket[0] = 0xFF;
 	_txpacket[1] = 0xFF;
-	_txpacket[2] = _id;
-	_txpacket[5] = _address;
+	_txpacket[PACKET_ID] = _id;
+	_txpacket[PACKET_ADDRESS] = _address;
 	switch (_inst)
 	{
 	case Packet::READ:
-		_txpacket[3] = 4;
-		_txpacket[4] = _inst;
-		_txpacket[6] = 1;
+		_txpacket[PACKET_LENGTH] = 4;
+		_txpacket[PACKET_INSTRUCTION] = _inst;
+		_txpacket[PACKET_VALUE] = 1;
 		break;
 	case Packet::WRITE:
-		_txpacket[3] = 4;
-		_txpacket[4] = _inst;
-		_txpacket[6] = _value;
+		_txpacket[PACKET_LENGTH] = 4;
+		_txpacket[PACKET_INSTRUCTION] = _inst;
+		_txpacket[PACKET_VALUE] = _value;
 		break;
 	case Packet::READW:
-		_txpacket[3] = 4;
-		_txpacket[4] = _inst - 2;
-		_txpacket[6] = 2;
+		_txpacket[PACKET_LENGTH] = 4;
+		_txpacket[PACKET_INSTRUCTION] = _inst - 2;
+		_txpacket[PACKET_VALUE] = 2;
 		break;
 	case Packet::WRITEW:
-		_txpacket[3] = 5;
-		_txpacket[4] = _inst - 2;
-		_txpacket[6] = _value;
-		_txpacket[7] = _value2;
+		_txpacket[PACKET_LENGTH] = 5;
+		_txpacket[PACKET_INSTRUCTION] = _inst - 2;
+		_txpacket[PACKET_VALUE] = _value;
+		_txpacket[PACKET_VALUE + 1] = _value2;
 		break;
 	}
 }
@@ -62,6 +62,18 @@ unsigned char *Packet::getTxPacket()
 unsigned char *Packet::getRxPacket()
 {
 	return _rxpacket;
+}
+
+int Packet::getValue()
+{
+	switch(_inst) {
+		case READ:
+			return (int)_rxpacket[PACKET_ADDRESS];
+		case READW:
+			return (int)(((int)_rxpacket[PACKET_VALUE] << 8) + (int)_rxpacket[PACKET_ADDRESS]);
+		default:
+			return 0;
+	}
 }
 
 unsigned char Packet::calculateChecksum(unsigned char *p)
