@@ -14,9 +14,9 @@ enum class states
 };
 
 int **LSchouderP;
-int **RschouderP;
-int **LschouderR;
-int **RschouderR;
+int **RSchouderP;
+int **LSchouderR;
+int **RSchouderR;
 int **Lelleboog;
 int **Relleboog;
 int **ToReady;
@@ -54,15 +54,15 @@ void initProcs()
 	LSchouderR[1][0] = -1;
 	LSchouderR[1][1] = 0;
 
-	RSchouderP = new int *[2];
+	RSchouderR = new int *[2];
 	for (int i = 0; i < 2; i++)
 	{
-		RSchouderP[i] = new int[2];
+		RSchouderR[i] = new int[2];
 	}
-	RSchouderP[0][0] = 1;
-	RSchouderP[0][1] = -1;
-	RSchouderP[1][0] = -1;
-	RSchouderP[1][1] = 0;
+	RSchouderR[0][0] = 1;
+	RSchouderR[0][1] = -1;
+	RSchouderR[1][0] = -1;
+	RSchouderR[1][1] = 0;
 
 	Lelleboog = new int *[2];
 	for (int i = 0; i < 2; i++)
@@ -87,7 +87,7 @@ void initProcs()
 	ToReady = new int *[6];
 	for (int i = 0; i < 6; i++)
 	{
-		Relleboog[i] = new int[7];
+		ToReady[i] = new int[7];
 	}
 
 	for (int i = 0; i < 6; i++)
@@ -97,74 +97,92 @@ void initProcs()
 			ToReady[i][j] = -1;
 		}
 	}
+	
+	ToReady[0][0] = 1;
+	ToReady[1][1] = 2;
+	ToReady[2][2] = 3;
+	ToReady[2][3] = 4;
+	ToReady[3][4] = 0;
+	ToReady[4][5] = 5;
+	ToReady[5][6] = 2;
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	for (int j = 0; j < 7; j++)
+	//	{
+	//		std::cout << " | "<< ToReady[i][j];
+	//	}
+	//	std::cout << '\n';
+	//}
+	//ToReady[5][3] = 2;
 
-	ToReady[0][5] = 1;
-	ToReady[1][0] = 2;
-	ToReady[2][1] = 3;
-	ToReady[2][2] = 4;
-	ToReady[3][6] = 0;
-	ToReady[4][4] = 5;
-	ToReady[5][3] = 2;
 }
 
 int main()
 {
+
 	CommunicationServer communicationserver;
+
 	initProcs();
+	std::cout << " hello\n " ; 
 	std::vector<Process> procs;
 	std::vector<std::string> alphabet;
 	alphabet.push_back("schouderPomhoog");
 	alphabet.push_back("schouderPomlaag");
 
 	//maybe alphabet.size() can be buggy, need research
-	Process proc("LSchouderP", RSchouderP, alphabet.size());
+	std::cout << "proc1 " << alphabet.size();
+	Process proc("LSchouderP", LSchouderP, alphabet.size());
 	proc.addAlphabet(alphabet);
+
 	procs.push_back(proc);
 
-	Process proc2("RschouderP", RschouderP, alphabet.size());
+	Process proc2("RSchouderP", RSchouderP, alphabet.size());
+	std::cout << "proc2 " << alphabet.size();
 	proc2.addAlphabet(alphabet);
 	procs.push_back(proc2);
 
 	alphabet.clear();
 	alphabet.push_back("schouderRomhoog");
 	alphabet.push_back("schouderRomlaag");
-	Process proc3("LschouderR", LschouderR, alphabet.size());
+	std::cout << "proc3 " << alphabet.size();
+	Process proc3("LSchouderR", LSchouderR, alphabet.size());
 	proc3.addAlphabet(alphabet);
 	procs.push_back(proc3);
 
-	Process proc4("RschouderR", RschouderR, alphabet.size());
+	std::cout << "proc4 " << alphabet.size();
+	Process proc4("RSchouderR", RSchouderR, alphabet.size());
 	proc4.addAlphabet(alphabet);
 	procs.push_back(proc4);
 
 	alphabet.clear();
-	alphabet.push_back("ellebogOmhoog");
+	alphabet.push_back("elleboogOmhoog");
 	alphabet.push_back("elleboogOmlaag");
+	std::cout << "proc5 " << alphabet.size();
 	Process proc5("Lelleboog", Lelleboog, alphabet.size());
 	proc5.addAlphabet(alphabet);
 	procs.push_back(proc5);
 
+	std::cout << "proc6 " << alphabet.size();
 	Process proc6("Relleboog", Relleboog, alphabet.size());
 	proc6.addAlphabet(alphabet);
 	procs.push_back(proc6);
-
 	alphabet.clear();
+	alphabet.push_back("schouderPomhoog");
 	alphabet.push_back("elleboogOmhoog");
 	alphabet.push_back("elleboogOmlaag");
 	alphabet.push_back("klappen");
-	alphabet.push_back("schouderBinnen");
-	alphabet.push_back("schouderBuiten");
-	alphabet.push_back("schouderOmhoog");
-	alphabet.push_back("schouderOmlaag");
-
-	Process proc7("ToReady", ToReady, alphabet.size());
+	alphabet.push_back("schouderPomlaag");
+	alphabet.push_back("schouderRomhoog");
+	alphabet.push_back("schouderRomlaag");
+	
+	std::cout << "proc7 ";
+	Process proc7("ToReady", ToReady, 6);
 	proc7.addAlphabet(alphabet);
 	procs.push_back(proc7);
-
-	for(auto& proc : procs)
+	for (auto& proc : procs)
 	{
-		CommunicationServer.addProcess(proc);
+		communicationserver.addProcess(&proc);
 	}
-
 	communicationserver.init();
 	communicationserver.getSensitiveLists();
 	communicationserver.getNextPossibleActions();

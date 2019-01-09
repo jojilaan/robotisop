@@ -23,6 +23,7 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
 	{
 		_alphabet.push_back(alpha);
 	}
+	printAlphabet();
 }
 
 void Process::printAlphabet()
@@ -47,16 +48,12 @@ std::string Process::getName()
 std::vector<std::string> Process::getSensitivityList()
 {
 	_sensitivityList.clear();
-	for (int i = 0; i < _nstates; i++)
+	for (int i = 0; i < _nstates; ++i)
 	{
-		//std::cout << " curentStatesss " << _name << _currentState << '\n';
-		//printf("state: %d \n", _FSM[i][_currentState]);
+
 		if (_FSM[i][_currentState] != -1)
 		{
-			//std::cout << _name << " is sensitive for: " << _alphabet[i] << '\n';
-			//_sensitivityList.push_back(_stateTable[i][_currentState]);
-
-			_sensitivityList.push_back(_alphabet[i]);
+			_sensitivityList.push_back(_alphabet.at(i));
 		}
 	}
 

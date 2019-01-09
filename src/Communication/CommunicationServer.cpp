@@ -17,6 +17,13 @@ CommunicationServer::~CommunicationServer()
 void CommunicationServer::init()
 {
 	createAlphabetTableHeader();
+	for(auto n : _allActions)
+	{
+		std::cout << "action " << ' ' << n;
+
+	}
+			std::cout << "\n ";
+
 	createLookUpTable();
 	fillLookUpTable();
 }
@@ -73,14 +80,14 @@ void CommunicationServer::fillLookUpTable()
 		}
 	}
 	//// print lookuptable
-	//for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
-	//{
-	//	for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
-	//	{
-	//		std::cout << _lookUpTable[i][j];
-	//	}
-	//	std::cout << "\n";
-	//}
+	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); i++)
+	{
+		for (int j = 0; static_cast<size_t>(j) < _allActions.size(); j++)
+		{
+			std::cout << _lookUpTable[i][j];
+		}
+		std::cout << "\n";
+	}
 	// print allActionsMap
 	//for (auto &x : _allActionsMap)
 	//{
@@ -114,22 +121,16 @@ void CommunicationServer::printProcesses()
 void CommunicationServer::getSensitiveLists()
 {
 	for (auto proc : _vProcesses)
-	{
+	{	
 		std::vector<std::string> kp = proc->getSensitivityList();
-		//for (auto p : kp)
-		//{
-		//	std::cout << p << " hjgkjggk";
-		//}
-		//std::cout << " \n";
+		for(auto a:kp)
+		{
+			std::cout << proc->getName() << " has " << a; 
+		}
+		std::cout << "\n"; 
 		_map[proc->getName()] = proc->getSensitivityList();
-		// print
-		//for(auto sL : _map[proc.getName()] )
-		//{
-		//    std::cout << "test  " << sL;
-		//}
-		//printf("\n");
 	}
-	//printf("\n");
+	
 }
 
 void CommunicationServer::getNextPossibleActions()
@@ -154,18 +155,24 @@ void CommunicationServer::getNextPossibleActions()
 	}
 
 	// print allActionsMap
-	//for (auto &x : nextPossibleActions)
-	//{
-	//	std::cout << "next " << x.first << ": " << x.second << '\n';
-	//}
+	for (auto &x : nextPossibleActions)
+	{
+		std::cout << "next " << x.first << ": " << x.second << '\n';
+	}
 	for (auto it = nextPossibleActions.cbegin(); it != nextPossibleActions.cend() /* not hoisted */; /* no increment */)
 	{
-
+		std::cout << _allActionsMap.find(it->first)->second; 
+		std::cout << _allActionsMap.find(it->first)->first; 
+		std::cout << "\n"; 
 		if (_allActionsMap.find(it->first)->second != it->second)
 		{
 			nextPossibleActions.erase(it);
 		}
 		++it;
+	}
+	for (auto &z : _allActionsMap)
+	{
+		std::cout << "All possible transitions: " << z.first << ' ' << z.second << '\n';
 	}
 	for (auto &x : nextPossibleActions)
 	{
