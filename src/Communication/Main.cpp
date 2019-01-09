@@ -28,41 +28,37 @@ void initProcs()
 	arrProcA[1][0] = -1;
 	arrProcA[1][1] = 0;
 	// arr ProcA //////////////////
-
 	// arr ProcB //////////////////
-	arrProcB = new int *[3];
-	for (int i = 0; i < 3; i++)
+	arrProcB = new int *[2];
+	for (int i = 0; i < 2; i++)
 	{
-		arrProcB[i] = new int[3];
+		arrProcB[i] = new int[2];
 	}
 	arrProcB[0][0] = 1;
 	arrProcB[0][1] = -1;
-	arrProcB[0][2] = -1;
 	arrProcB[1][0] = -1;
-	arrProcB[1][1] = 2;
-	arrProcB[1][2] = -1;
-	arrProcB[2][0] = -1;
-	arrProcB[2][1] = -1;
-	arrProcB[2][2] = 0;
+	arrProcB[1][1] = 0;
 	// arr ProcB //////////////////
+
 }
 
 int main()
 {
 	CommunicationServer communicationserver;
 	std::vector<std::string> alphabet;
-	alphabet.push_back("write");
-	alphabet.push_back("read");
+	alphabet.push_back("make");
+	alphabet.push_back("ready");
 
 	initProcs();
-
-	Process proc("proca", arrProcA, 2);
+	//maybe alphabet.size() can be buggy, need research 
+	Process proc("Maker", arrProcA, alphabet.size());
 	proc.addAlphabet(alphabet);
 	//printf("Alphabet:\n");
 	//proc.printAlphabet();
-
-	alphabet.push_back("b.wait");
-	Process proc2("Proc2", arrProcB, 3);
+	alphabet.clear();
+	alphabet.push_back("ready");
+	alphabet.push_back("use");
+	Process proc2("User", arrProcB, alphabet.size());
 	proc2.addAlphabet(alphabet);
 
 	communicationserver.addProcess(&proc);
