@@ -26,7 +26,7 @@ void CommunicationServer::createAlphabetTableHeader()
 	//add alphabet strings to first row of table
 	_allActions.clear();
 
-	std::cout << _vProcesses.size();
+	//std::cout << _vProcesses.size();
 	for (int i = 0; static_cast<size_t>(i) < _vProcesses.size(); ++i)
 	{
 		std::vector<std::string> alphabet = _vProcesses.at(i)->getAlphabet();
@@ -116,11 +116,11 @@ void CommunicationServer::getSensitiveLists()
 	for (auto proc : _vProcesses)
 	{
 		std::vector<std::string> kp = proc->getSensitivityList();
-		for (auto p : kp)
-		{
-			std::cout << p << " hjgkjggk";
-		}
-		std::cout << " \n";
+		//for (auto p : kp)
+		//{
+		//	std::cout << p << " hjgkjggk";
+		//}
+		//std::cout << " \n";
 		_map[proc->getName()] = proc->getSensitivityList();
 		// print
 		//for(auto sL : _map[proc.getName()] )
@@ -144,7 +144,7 @@ void CommunicationServer::getNextPossibleActions()
 			if (nextPossibleActions.find(s) == nextPossibleActions.end())
 			{
 				nextPossibleActions.insert(std::pair<std::string, int>(s, 1));
-				nextPossibleActions.insert(std::pair<std::string, int>("read", 1));
+				//nextPossibleActions.insert(std::pair<std::string, int>("read", 1));
 			}
 			else //found in map
 			{
@@ -169,7 +169,7 @@ void CommunicationServer::getNextPossibleActions()
 	}
 	for (auto &x : nextPossibleActions)
 	{
-		std::cout << "Choose: " << x.first << '\n';
+		std::cout << "Next possible transitions: " << x.first << '\n';
 	}
 }
 

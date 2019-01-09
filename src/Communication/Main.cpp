@@ -73,19 +73,21 @@ int main()
 	communicationserver.getNextPossibleActions();
 
 	// start loop here
-	//while (true)
-	//{
-		
+	while (true)
+	{	
 		// enter number 
-		int i;
-		std::cout << "Please enter an integer value: ";
-		std::cin >> i;
+		std::string input = ""; 
+		std::cout << "Please enter an string value: ";
+		getline(std::cin, input); 
+		//std::cin >> i;
 		// make transistion 
-		communicationserver.makeTransition("write");
+		//std::cout << input; 
+		communicationserver.makeTransition(input);
 		communicationserver.getSensitiveLists();
+
 		// getNextPossibleActions()
 		communicationserver.getNextPossibleActions();
-	//}
+	}
 
 	return 1;
 }

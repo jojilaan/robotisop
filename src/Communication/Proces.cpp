@@ -77,5 +77,5 @@ void Process::makeTransition(std::string trans)
 	int nextState = _FSM[z][_currentState]; 
 	//std::cout << " next state " << nextState << '\n';
 	_currentState = nextState; 
-	//std::cout << " curentState " << _currentState << '\n';
+	std::cout << " curentState " << _currentState << '\n';
 }
