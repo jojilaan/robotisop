@@ -26,12 +26,14 @@ bool moveServo(Connection &connection, unsigned char id, int value)
 	Packet packet = Packet(id, Packet::WRITEW, P_GOAL_POSITION_L, value);
 	if (connection.transferPacket(packet))
 	{
-		std::cout << "moveServo(" << id << ", " << value << ") SUCCES" << std::endl;
+		if (debug)
+			std::cout << "moveServo(" << static_cast<int>(id) << ", " << value << ") SUCCES" << std::endl;
 		return true;
 	}
 	else
 	{
-		std::cout << "moveServo(" << id << ", " << value << ") FAILED" << std::endl;
+		if (debug)
+			std::cout << "moveServo(" << static_cast<int>(id) << ", " << value << ") FAILED" << std::endl;
 		return false;
 	}
 }
