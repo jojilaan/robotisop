@@ -15,7 +15,6 @@ public:
 	void nextState(int);
 	void init();
 	void getSensitiveLists();
-	std::vector<std::vector<int>> GetStateTable();
 	void getNextPossibleActions();
 	void makeTransition(std::string trans);
 
@@ -24,13 +23,12 @@ private:
 	std::vector<Process *> _vProcesses;
 	//std::vector<std::vector<int>> _stateTable;
 	char **_lookUpTable;
-	std::unordered_map<std::string, std::vector<std::string>> _map;
+	std::unordered_map<std::string, std::vector<std::string>> _mSensitivityLists;
 	std::unordered_map<std::string, int> nextPossibleActions;
 	std::unordered_map<std::string, int> _allActionsMap;
 
 	void createAlphabetTableHeader();
-	void fillLookUpTable();
-	void createLookUpTable();
+	void fillActionMap();
 };
 
 #endif /* MY_CLASS_H */

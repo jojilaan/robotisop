@@ -9,8 +9,8 @@ Process::Process(std::string name, int **FSM, int states)
 	_name = name;
 	_nstates = states;
 	_FSM = FSM;
+	//process should always start in its 0 state
 	_currentState = 0;
-	//_sensitivityList = NULL;
 }
 
 Process::~Process()
@@ -23,11 +23,11 @@ void Process::addAlphabet(std::vector<std::string> alphabet)
 	{
 		_alphabet.push_back(alpha);
 	}
-	//printAlphabet();
 }
 
 void Process::printAlphabet()
 {
+	//for debugging purposes
 	for (const auto alpha : _alphabet)
 	{
 		std::cout << alpha << ' ';
@@ -59,19 +59,18 @@ std::vector<std::string> Process::getSensitivityList()
 	return _sensitivityList;
 }
 
-void Process::makeTransition(std::string trans)
+void Process::makeTransition(std::string requestedAction)
 {
 	//kijk in statetable
 	//verhoog current state
-	// Find given element in vector
-	auto it = std::find(_alphabet.begin(), _alphabet.end(), trans);
-	int z; 
+	//Find given element in vector
+	auto it = std::find(_alphabet.begin(), _alphabet.end(), requestedAction);
+	int FSMIndex;
+
 	if (it != _alphabet.end())
 	{
-		z = std::distance(_alphabet.begin(), it);
+		//find position in alphabet
+		FSMIndex = std::distance(_alphabet.begin(), it);
+		_currentState = _FSM[_currentState][FSMIndex];
 	}
-	int nextState = _FSM[_currentState][z]; 
-	//std::cout << " next state " << nextState << '\n';
-	_currentState = nextState; 
-	//std::cout << " curentState " << _currentState << '\n';
 }

@@ -2,17 +2,7 @@
 #define PROCESS_H
 #include <vector>
 #include <map>
-class CommunicationServer;
-//#include "CommunicationServer.hpp"
-//c CommunicationServer;
-
-/*enum class alphabet
-{
-	WRITE,
-	READ,
-	BW
-};
-*/
+//class CommunicationServer;
 
 class Process
 {
@@ -25,7 +15,6 @@ public:
 	std::vector<std::string> getAlphabet();
 	std::vector<std::string> getSensitivityList();
 	void makeTransition(std::string trans);
-
 
 private:
 	int **_FSM;
