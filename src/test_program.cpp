@@ -103,7 +103,7 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "R_ELBOW: SUCCES" << std::endl;
 
-	usleep(50000);
+	usleep(1000000);
 
 	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 3451);
 	if (connection.transferPacket(packet))
