@@ -1,11 +1,5 @@
 #include <HDS.hpp>
 
-HDS::HDS()
-{
-	_connection = Connection("/dev/ttyUSB0");
-	_connection.openConnection();
-}
-
 HDS::HDS(std::string portname)
 {
 	_connection = Connection(portname);

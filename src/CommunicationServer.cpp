@@ -4,10 +4,8 @@
 #include <algorithm>
 #include <iterator> // std::iterator, std::input_iterator_tag
 
-CommunicationServer::CommunicationServer()
+CommunicationServer::CommunicationServer() : _hds("/dev/ttyUSB0")
 {
-	_hds = HDS("/dev/ttyUSB0");
-	_hds.init();
 }
 
 CommunicationServer::~CommunicationServer()

@@ -61,7 +61,6 @@ class HDS
 public:
 	Connection _connection;
 
-	HDS();
 	HDS(std::string portname);
 	~HDS();
 	void init();
