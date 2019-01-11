@@ -15,7 +15,7 @@ public:
 	void printProcesses();
 	void nextState(int);
 	void init();
-	void getSensitiveLists();
+	std::vector<std::string> getSensitiveLists();
 	void getNextPossibleActions();
 	void makeTransition(std::string trans);
 
