@@ -95,13 +95,13 @@ int main()
 
 	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 2127);
 	if (connection.transferPacket(packet))
-		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
+		std::cout << "L_SHOULDER_PITCH: SUCCES" << std::endl;
 	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 2534);
 	if (connection.transferPacket(packet))
-		std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+		std::cout << "L_SHOULDER_ROLL: SUCCES" << std::endl;
 	packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 3107);
 	if (connection.transferPacket(packet))
-		std::cout << "R_ELBOW: SUCCES" << std::endl;
+		std::cout << "L_ELBOW: SUCCES" << std::endl;
 
 	usleep(1000000);
 
@@ -111,7 +111,7 @@ int main()
 
 	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 625);
 	if (connection.transferPacket(packet))
-		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
+		std::cout << "L_SHOULDER_PITCH: SUCCES" << std::endl;
 
 	usleep(1000000);
 
@@ -121,11 +121,11 @@ int main()
 
 	packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 2621);
 	if (connection.transferPacket(packet))
-		std::cout << "R_ELBOW: SUCCES" << std::endl;
+		std::cout << "L_ELBOW: SUCCES" << std::endl;
 
 	for (size_t i = 0; i < 5; i++)
 	{
-		usleep(1000000);
+		usleep(500000);
 
 		packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1240);
 		if (connection.transferPacket(packet))
@@ -133,9 +133,9 @@ int main()
 
 		packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 2850);
 		if (connection.transferPacket(packet))
-			std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+			std::cout << "L_SHOULDER_ROLL: SUCCES" << std::endl;
 
-		usleep(1000000);
+		usleep(500000);
 
 		packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1560);
 		if (connection.transferPacket(packet))
@@ -143,7 +143,7 @@ int main()
 
 		packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 2534);
 		if (connection.transferPacket(packet))
-			std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+			std::cout << "L_SHOULDER_ROLL: SUCCES" << std::endl;
 	}
 
 	usleep(50000);
