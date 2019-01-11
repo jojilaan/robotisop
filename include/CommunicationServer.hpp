@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include "Process.hpp"
+#include "HDS.hpp"
 
 class CommunicationServer
 {
@@ -26,6 +27,7 @@ private:
 	std::unordered_map<std::string, std::vector<std::string>> _mSensitivityLists;
 	std::unordered_map<std::string, int> nextPossibleActions;
 	std::unordered_map<std::string, int> _allActionsMap;
+	HDS _hds;
 
 	void createAlphabetTableHeader();
 	void fillActionMap();

@@ -117,7 +117,7 @@ void initProcs()
 
 }
 
-int not_main()
+int main()
 {
 
 	CommunicationServer communicationserver;

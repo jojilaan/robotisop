@@ -1,5 +1,10 @@
 #include <HDS.hpp>
-#include <test_program.hpp>
+
+HDS::HDS()
+{
+	_connection = Connection("/dev/ttyUSB0");
+	_connection.openConnection();
+}
 
 HDS::HDS(std::string portname)
 {
@@ -67,7 +72,7 @@ int HDS::readServo(unsigned char id)
 	}
 }
 
-bool HDS::readMoveServo( unsigned char id)
+bool HDS::readMoveServo(unsigned char id)
 {
 	int value = readServo(id);
 
@@ -214,4 +219,32 @@ void HDS::elbowsDown()
 
 	moveServo(ID_R_ELBOW, 980);
 	moveServo(ID_L_ELBOW, 3107);
+}
+
+void HDS::makeTransition(std::string trans)
+{
+	if (trans == "schouderPomhoog")
+	{
+		shouldersUp();
+	}
+	if (trans == "schouderPomlaag")
+	{
+		shouldersDown();
+	}
+	if (trans == "elleboogOmhoog")
+	{
+		elbowsUp();
+	}
+	if (trans == "elleboogOmlaag")
+	{
+		elbowsDown();
+	}
+	if (trans == "schouderRomhoog")
+	{
+		shouldersInward();
+	}
+	if (trans == "schouderRomlaag")
+	{
+		shouldersOutward();
+	}
 }

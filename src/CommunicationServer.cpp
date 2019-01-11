@@ -6,6 +6,7 @@
 
 CommunicationServer::CommunicationServer()
 {
+	_hds = HDS("/dev/ttyUSB0");
 }
 
 CommunicationServer::~CommunicationServer()
@@ -123,6 +124,7 @@ void CommunicationServer::getNextPossibleActions()
 
 void CommunicationServer::makeTransition(std::string requestedAction)
 {
+	bool peformed = false;
 	for (auto proc : _vProcesses)
 	{
 		for (auto const &sensitiveAction : _mSensitivityLists[proc->getName()])
@@ -130,7 +132,13 @@ void CommunicationServer::makeTransition(std::string requestedAction)
 			if (sensitiveAction == requestedAction)
 			{
 				proc->makeTransition(sensitiveAction);
+				peformed = true;
 			}
 		}
+	}
+
+	if(peformed)
+	{
+		_hds.makeTransition(requestedAction);
 	}
 }
