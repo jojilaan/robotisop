@@ -123,6 +123,16 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "R_ELBOW: SUCCES" << std::endl;
 
+	usleep(1000000);
+
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1500);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+
+	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 2620);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+
 	usleep(50000);
 
 	connection.closeConnection();
