@@ -38,6 +38,36 @@ bool moveServo(Connection &connection, unsigned char id, int value)
 	}
 }
 
+int readServo(Connection &connection, unsigned char id)
+{
+	Packet packet = Packet(id, Packet::READW, P_PRESENT_POSITION_L);
+	if (connection.transferPacket(packet))
+	{
+		if (debug)
+			std::cout << "readServo(" << static_cast<int>(id) << " => " << packet.getValue() << " SUCCES" << std::endl;
+		return packet.getValue();
+	}
+	else
+	{
+		if (debug)
+			std::cout << "readServo(" << static_cast<int>(id) << " FAILED" << std::endl;
+		return -1;
+	}
+}
+
+bool readMoveServo(Connection &connection, unsigned char id)
+{
+	int value = readServo(connection, id);
+
+	if (value < 0)
+	{
+		return false;
+	}
+
+	moveServo(connection, id, value);
+	return true;
+}
+
 int main()
 {
 	Connection connection = Connection("/dev/ttyUSB0");
@@ -67,7 +97,6 @@ int main()
 	packet = Packet(ID_R_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-
 	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
@@ -78,27 +107,64 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	packet = Packet(ID_R_SHOULDER_PITCH, Packet::READW, P_PRESENT_POSITION_L);
+	packet = Packet(ID_R_HIP_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
-		std::cout << "R_SHOULDER_PITCH: " << packet.getValue() << std::endl;
-	packet = Packet(ID_R_SHOULDER_ROLL, Packet::READW, P_PRESENT_POSITION_L);
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_HIP_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
-		std::cout << "R_SHOULDER_ROLL: " << packet.getValue() << std::endl;
-	packet = Packet(ID_R_ELBOW, Packet::READW, P_PRESENT_POSITION_L);
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_HIP_YAW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
-		std::cout << "R_ELBOW: " << packet.getValue() << std::endl;
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_KNEE, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_ANKLE_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_ANKLE_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_HIP_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_HIP_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_HIP_YAW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_KNEE, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_ANKLE_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_ANKLE_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
 
-	packet = Packet(ID_L_SHOULDER_PITCH, Packet::READW, P_PRESENT_POSITION_L);
-	if (connection.transferPacket(packet))
-		std::cout << "L_SHOULDER_PITCH: " << packet.getValue() << std::endl;
-	packet = Packet(ID_L_SHOULDER_ROLL, Packet::READW, P_PRESENT_POSITION_L);
-	if (connection.transferPacket(packet))
-		std::cout << "L_SHOULDER_ROLL: " << packet.getValue() << std::endl;
-	packet = Packet(ID_L_ELBOW, Packet::READW, P_PRESENT_POSITION_L);
-	if (connection.transferPacket(packet))
-		std::cout << "L_ELBOW: " << packet.getValue() << std::endl;
+	readServo(connection, ID_R_SHOULDER_PITCH);
+	readServo(connection, ID_R_SHOULDER_ROLL);
+	readServo(connection, ID_R_ELBOW);
+	readServo(connection, ID_L_SHOULDER_PITCH);
+	readServo(connection, ID_L_SHOULDER_ROLL);
+	readServo(connection, ID_L_ELBOW);
 
-	usleep(50000);
+	readMoveServo(connection, ID_R_HIP_PITCH);
+	readMoveServo(connection, ID_R_HIP_ROLL);
+	readMoveServo(connection, ID_R_HIP_YAW);
+	readMoveServo(connection, ID_R_KNEE);
+	readMoveServo(connection, ID_R_ANKLE_PITCH);
+	readMoveServo(connection, ID_R_ANKLE_ROLL);
+	readMoveServo(connection, ID_L_HIP_PITCH);
+	readMoveServo(connection, ID_L_HIP_ROLL);
+	readMoveServo(connection, ID_L_HIP_YAW);
+	readMoveServo(connection, ID_L_KNEE);
+	readMoveServo(connection, ID_L_ANKLE_PITCH);
+	readMoveServo(connection, ID_L_ANKLE_ROLL);
+
+	usleep(1000000);
 
 	// Right arm init
 	moveServo(connection, ID_R_SHOULDER_PITCH, 1948);
