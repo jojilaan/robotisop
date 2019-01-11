@@ -26,7 +26,7 @@ void CommunicationServer::createAlphabetTableHeader()
 	{
 		for (auto &alpha : proc->getAlphabet())
 		{
-			if (std::find(_allActions.begin(), _allActions.end(), alpha != _allActions.end())
+			if (std::find(_allActions.begin(), _allActions.end(), alpha) != _allActions.end())
 			{
 				continue;
 			}
@@ -113,11 +113,12 @@ void CommunicationServer::getNextPossibleActions()
 		}
 	}
 
-	std::cout << "Next possible transitions:[ " for (auto &x : nextPossibleActions)
+	std::cout << "Next possible transitions:[ ";
+	for (auto &x : nextPossibleActions)
 	{
 		std::cout << x.first << ' ';
 	}
-	std::cout << ' ]\n';
+	std::cout << " ]\n";
 }
 
 void CommunicationServer::makeTransition(std::string requestedAction)
@@ -128,7 +129,7 @@ void CommunicationServer::makeTransition(std::string requestedAction)
 		{
 			if (sensitiveAction == requestedAction)
 			{
-				proc->makeTransition(value);
+				proc->makeTransition(sensitiveAction);
 			}
 		}
 	}
