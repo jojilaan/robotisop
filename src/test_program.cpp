@@ -61,6 +61,16 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
+	packet = Packet(ID_R_SHOULDER_PITCH, Packet::READW, P_PRESENT_POSITION_L);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_PITCH: " << packet.getValue() << std::endl;
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::READW, P_PRESENT_POSITION_L);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_ROLL: " << packet.getValue() << std::endl;
+	packet = Packet(ID_R_ELBOW, Packet::READW, P_PRESENT_POSITION_L);
+	if (connection.transferPacket(packet))
+		std::cout << "R_ELBOW: " << packet.getValue() << std::endl;
+
 	usleep(50000);
 
 	connection.closeConnection();
