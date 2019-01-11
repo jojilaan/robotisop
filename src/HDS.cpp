@@ -85,7 +85,8 @@ void HDS::init()
 
 	usleep(1000000);
 
-	// Set P_GAIN of 8 for arms and legs
+	std::cout << "set P_GAIN" << std::endl;
+
 	Packet packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (_connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
@@ -141,7 +142,8 @@ void HDS::init()
 	if (_connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	// Lock legs
+	std::cout << "lock legs" << std::endl;
+
 	readMoveServo(ID_R_HIP_PITCH);
 	readMoveServo(ID_R_HIP_ROLL);
 	readMoveServo(ID_R_HIP_YAW);
@@ -158,6 +160,8 @@ void HDS::init()
 
 void HDS::beginPosition()
 {
+	std::cout << "beginPosition()" << std::endl;
+
 	usleep(1000000);
 
 	moveServo(ID_R_SHOULDER_PITCH, 1948);
@@ -170,6 +174,8 @@ void HDS::beginPosition()
 
 void HDS::shouldersUp()
 {
+	std::cout << "shouldersUp()" << std::endl;
+
 	usleep(1000000);
 
 	moveServo(ID_R_SHOULDER_PITCH, 3451);
@@ -178,6 +184,8 @@ void HDS::shouldersUp()
 
 void HDS::shouldersDown()
 {
+	std::cout << "shouldersDown()" << std::endl;
+
 	usleep(1000000);
 
 	moveServo(ID_R_SHOULDER_PITCH, 1948);
@@ -186,6 +194,8 @@ void HDS::shouldersDown()
 
 void HDS::shouldersInward()
 {
+	std::cout << "shouldersInward()" << std::endl;
+
 	usleep(500000);
 	moveServo(ID_R_SHOULDER_ROLL, 1240);
 	moveServo(ID_L_SHOULDER_ROLL, 2850);
@@ -193,6 +203,8 @@ void HDS::shouldersInward()
 
 void HDS::shouldersOutward()
 {
+	std::cout << "shouldersOutward()" << std::endl;
+
 	usleep(500000);
 
 	moveServo(ID_R_SHOULDER_ROLL, 1560);
@@ -201,6 +213,8 @@ void HDS::shouldersOutward()
 
 void HDS::elbowsUp()
 {
+	std::cout << "shouldersDown()" << std::endl;
+
 	usleep(1000000);
 
 	moveServo(ID_R_ELBOW, 1480);
@@ -209,6 +223,8 @@ void HDS::elbowsUp()
 
 void HDS::elbowsDown()
 {
+	std::cout << "shouldersDown()" << std::endl;
+
 	usleep(1000000);
 
 	moveServo(ID_R_ELBOW, 980);
