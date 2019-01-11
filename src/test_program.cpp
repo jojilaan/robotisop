@@ -86,7 +86,7 @@ int main()
 	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 1948);
 	if (connection.transferPacket(packet))
 		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
-	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1600);
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1560);
 	if (connection.transferPacket(packet))
 		std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
 	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 980);
