@@ -83,6 +83,18 @@ int main()
 
 	usleep(50000);
 
+	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 1948);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1537);
+	if (connection.transferPacket(packet))
+		std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
+	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 1195);
+	if (connection.transferPacket(packet))
+		std::cout << "R_ELBOW: SUCCES" << std::endl;
+
+	usleep(50000);
+
 	connection.closeConnection();
 
 	return 0;
