@@ -115,7 +115,7 @@ int main()
 
 	usleep(1000000);
 
-	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 1602);
+	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 1450);
 	if (connection.transferPacket(packet))
 		std::cout << "R_ELBOW: SUCCES" << std::endl;
 
