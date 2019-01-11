@@ -15,6 +15,7 @@
 
 class Connection {
 public:
+	Connection();
 	Connection(std::string portname);
 	~Connection();
 

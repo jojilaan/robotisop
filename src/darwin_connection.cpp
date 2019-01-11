@@ -1,5 +1,11 @@
 #include "darwin_connection.hpp"
 
+Connection::Connection()
+{
+	_portname = "/dev/ttyUSB0";
+	_fd = -1;
+}
+
 Connection::Connection(std::string portname)
 {
 	_portname = portname;
@@ -52,6 +58,7 @@ bool Connection::closeConnection()
 		if (debug)
 			std::cout << "closeConnection(" << _fd << ") failed with the following error: " << strerror(errno) << std::endl;
 
+		_fd = -1;
 		return false;
 	}
 	else
@@ -59,6 +66,7 @@ bool Connection::closeConnection()
 		if (debug)
 			std::cout << "closeConnection(" << _fd << ") success" << std::endl;
 
+		_fd = -1;
 		return true;
 	}
 }
@@ -143,6 +151,10 @@ bool Connection::initConnection()
 // Transfers a packet across the connection
 bool Connection::transferPacket(Packet& packet)
 {
+	if (_fd < 0) {
+		return false;
+	}
+
 	unsigned char *txpacket = packet.getTxPacket();
 	unsigned char *rxpacket = packet.getRxPacket();
 	bool res = false;

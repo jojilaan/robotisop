@@ -97,7 +97,7 @@ void initProcs()
 			ToReady[i][j] = -1;
 		}
 	}
-	
+
 	ToReady[0][0] = 1;
 	ToReady[1][1] = 2;
 	ToReady[2][2] = 3;
@@ -117,7 +117,7 @@ void initProcs()
 
 }
 
-int main()
+int not_main()
 {
 
 	CommunicationServer communicationserver;
@@ -167,7 +167,7 @@ int main()
 	alphabet.push_back("schouderPomlaag");
 	alphabet.push_back("schouderRomhoog");
 	alphabet.push_back("schouderRomlaag");
-	
+
 	Process proc7("ToReady", ToReady, 6);
 	proc7.addAlphabet(alphabet);
 	procs.push_back(proc7);
