@@ -108,22 +108,20 @@ int main()
 	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 3451);
 	if (connection.transferPacket(packet))
 		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
-	// packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 1537);
-	// if (connection.transferPacket(packet))
-	// 	std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
-	// packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 1195);
-	// if (connection.transferPacket(packet))
-	// 	std::cout << "R_ELBOW: SUCCES" << std::endl;
 
 	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITEW, P_GOAL_POSITION_L, 625);
 	if (connection.transferPacket(packet))
 		std::cout << "R_SHOULDER_PITCH: SUCCES" << std::endl;
-	// packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_GOAL_POSITION_L, 2534);
-	// if (connection.transferPacket(packet))
-	// 	std::cout << "R_SHOULDER_ROLL: SUCCES" << std::endl;
-	// packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 3107);
-	// if (connection.transferPacket(packet))
-	// 	std::cout << "R_ELBOW: SUCCES" << std::endl;
+
+	usleep(1000000);
+
+	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 1602);
+	if (connection.transferPacket(packet))
+		std::cout << "R_ELBOW: SUCCES" << std::endl;
+
+	packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_GOAL_POSITION_L, 2621);
+	if (connection.transferPacket(packet))
+		std::cout << "R_ELBOW: SUCCES" << std::endl;
 
 	usleep(50000);
 
