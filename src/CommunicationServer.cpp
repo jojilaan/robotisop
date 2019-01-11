@@ -7,6 +7,7 @@
 CommunicationServer::CommunicationServer() : _hds("/dev/ttyUSB0")
 {
 	_hds.init();
+	_hds.beginPosition();
 }
 
 CommunicationServer::~CommunicationServer()

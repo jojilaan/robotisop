@@ -186,6 +186,9 @@ int main()
 		std::string input = "";
 		std::cout << "Please enter an string value: ";
 		getline(std::cin, input);
+		if (input == "q") {
+			return 1;
+		}
 		//std::cin >> i;
 		// make transistion
 		//std::cout << input;
