@@ -68,27 +68,12 @@ bool readMoveServo(Connection &connection, unsigned char id)
 	return true;
 }
 
-int main()
+void init(Connection &connection)
 {
-	Connection connection = Connection("/dev/ttyUSB0");
-	connection.openConnection();
-	Packet packet = Packet(ID_CM, Packet::WRITE, P_DXL_POWER, static_cast<unsigned char>(1));
-	if (connection.transferPacket(packet))
-	{
-		std::cout << "SUCCES" << std::endl;
-		packet = Packet(ID_CM, Packet::WRITEW, P_LED_HEAD_L, (int)((((0 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((255 & 0xFF) >> 3)));
-		connection.transferPacket(packet);
+	usleep(1000000);
 
-		sleepCustom(300);
-	}
-	else
-	{
-		std::cout << "DXL Power on failed" << std::endl;
-		connection.closeConnection();
-		return -1;
-	}
-
-	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
+	// Set P_GAIN of 8 for arms and legs
+	Packet packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
@@ -106,7 +91,6 @@ int main()
 	packet = Packet(ID_L_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
-
 	packet = Packet(ID_R_HIP_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
@@ -144,13 +128,7 @@ int main()
 	if (connection.transferPacket(packet))
 		std::cout << "SUCCES" << std::endl;
 
-	readServo(connection, ID_R_SHOULDER_PITCH);
-	readServo(connection, ID_R_SHOULDER_ROLL);
-	readServo(connection, ID_R_ELBOW);
-	readServo(connection, ID_L_SHOULDER_PITCH);
-	readServo(connection, ID_L_SHOULDER_ROLL);
-	readServo(connection, ID_L_ELBOW);
-
+	// Lock legs
 	readMoveServo(connection, ID_R_HIP_PITCH);
 	readMoveServo(connection, ID_R_HIP_ROLL);
 	readMoveServo(connection, ID_R_HIP_YAW);
@@ -163,65 +141,99 @@ int main()
 	readMoveServo(connection, ID_L_KNEE);
 	readMoveServo(connection, ID_L_ANKLE_PITCH);
 	readMoveServo(connection, ID_L_ANKLE_ROLL);
+}
 
+void beginPosition(Connection &connection)
+{
 	usleep(1000000);
 
-	// Right arm init
 	moveServo(connection, ID_R_SHOULDER_PITCH, 1948);
 	moveServo(connection, ID_R_SHOULDER_ROLL, 1560);
 	moveServo(connection, ID_R_ELBOW, 980);
-
-	// Left arm init
 	moveServo(connection, ID_L_SHOULDER_PITCH, 2127);
 	moveServo(connection, ID_L_SHOULDER_ROLL, 2534);
 	moveServo(connection, ID_L_ELBOW, 3107);
+}
 
+void shouldersUp(Connection &connection)
+{
 	usleep(1000000);
 
-	// First position
 	moveServo(connection, ID_R_SHOULDER_PITCH, 3451);
 	moveServo(connection, ID_L_SHOULDER_PITCH, 625);
+}
 
+void shouldersDown(Connection &connection)
+{
 	usleep(1000000);
 
-	// Second position
+	moveServo(connection, ID_R_SHOULDER_PITCH, 1948);
+	moveServo(connection, ID_L_SHOULDER_PITCH, 2127);
+}
+
+void shouldersInward(Connection &connection)
+{
+	usleep(500000);
+	moveServo(connection, ID_R_SHOULDER_ROLL, 1240);
+	moveServo(connection, ID_L_SHOULDER_ROLL, 2850);
+}
+
+void shouldersOutward(Connection &connection)
+{
+	usleep(500000);
+
+	moveServo(connection, ID_R_SHOULDER_ROLL, 1560);
+	moveServo(connection, ID_L_SHOULDER_ROLL, 2534);
+}
+
+void elbowsUp(Connection &connection)
+{
+	usleep(1000000);
+
 	moveServo(connection, ID_R_ELBOW, 1480);
 	moveServo(connection, ID_L_ELBOW, 2621);
+}
+
+void elbowsDown(Connection &connection)
+{
+	usleep(1000000);
+
+	moveServo(connection, ID_R_ELBOW, 980);
+	moveServo(connection, ID_L_ELBOW, 3107);
+}
+
+int main()
+{
+	Connection connection = Connection("/dev/ttyUSB0");
+	connection.openConnection();
+	Packet packet = Packet(ID_CM, Packet::WRITE, P_DXL_POWER, static_cast<unsigned char>(1));
+	if (connection.transferPacket(packet))
+	{
+		std::cout << "SUCCES" << std::endl;
+		packet = Packet(ID_CM, Packet::WRITEW, P_LED_HEAD_L, (int)((((0 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((255 & 0xFF) >> 3)));
+		connection.transferPacket(packet);
+
+		sleepCustom(300);
+	}
+	else
+	{
+		std::cout << "DXL Power on failed" << std::endl;
+		connection.closeConnection();
+		return -1;
+	}
+
+	init(connection);
+	shouldersUp(connection);
+	elbowsUp(connection);
 
 	for (size_t i = 0; i < 5; i++)
 	{
-		usleep(500000);
-
-		// Clap
-		moveServo(connection, ID_R_SHOULDER_ROLL, 1240);
-		moveServo(connection, ID_L_SHOULDER_ROLL, 2850);
-
-		usleep(500000);
-
-		moveServo(connection, ID_R_SHOULDER_ROLL, 1560);
-		moveServo(connection, ID_L_SHOULDER_ROLL, 2534);
+		shouldersInward(connection);
+		shouldersOutward(connection);
 	}
 
-	usleep(500000);
-
-	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
-	packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
-	if (connection.transferPacket(packet))
-		std::cout << "SUCCES" << std::endl;
+	elbowsDown(connection);
+	shouldersDown(connection);
 
 	connection.closeConnection();
 
