@@ -202,7 +202,26 @@ int main()
 		moveServo(connection, ID_L_SHOULDER_ROLL, 2534);
 	}
 
-	usleep(50000);
+	usleep(500000);
+
+	packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_R_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
+	packet = Packet(ID_L_ELBOW, Packet::WRITEW, P_TORQUE_ENABLE, 0);
+	if (connection.transferPacket(packet))
+		std::cout << "SUCCES" << std::endl;
 
 	connection.closeConnection();
 
