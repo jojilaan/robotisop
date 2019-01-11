@@ -71,7 +71,7 @@ void CommunicationServer::printProcesses()
 	printf("\n");
 }
 
-CommunicationServer::getSensitiveLists()
+void CommunicationServer::getSensitiveLists()
 {
 	//get all the the sensitivity lists and map them.
 	for (auto proc : _vProcesses)
