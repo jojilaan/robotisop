@@ -205,7 +205,7 @@ int main()
 	/* proc6 begin */
 
 	/* proc7 begin */
-	Process proc7("ToReady", LeftToReady, 6);
+	Process proc7("LeftToReady", LeftToReady, 6);
 	procAlphabet.push_back("left." + alphabet.at(0));
 	procAlphabet.push_back("left." + alphabet.at(1));
 	procAlphabet.push_back("left." + alphabet.at(2));
@@ -219,7 +219,7 @@ int main()
 	/* proc7 begin */
 
 	/* proc8 begin */
-	Process proc8("ToReady", LeftToReady, 6);
+	Process proc8("RightToReady", RightToReady, 6);
 	procAlphabet.push_back("right." + alphabet.at(0));
 	procAlphabet.push_back("right." + alphabet.at(1));
 	procAlphabet.push_back("right." + alphabet.at(2));
