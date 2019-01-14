@@ -210,5 +210,5 @@ int main()
 {
 	HDS hds = HDS("/dev/ttyUSB0");
 
-	hds.init();
+	hds.readArms();
 }
