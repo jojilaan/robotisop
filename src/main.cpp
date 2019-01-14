@@ -121,10 +121,13 @@ int main()
 {
 
 	CommunicationServer communicationserver;
+	srand(time(NULL));
 
 	initProcs();
 	std::vector<Process> procs;
 	std::vector<std::string> alphabet;
+	std::vector<std::string> sensitivityList;
+
 	alphabet.push_back("schouderPomhoog");
 	alphabet.push_back("schouderPomlaag");
 
@@ -177,26 +180,28 @@ int main()
 	}
 	communicationserver.init();
 	communicationserver.getSensitiveLists();
-	communicationserver.getNextPossibleActions();
+	sensitivityList = communicationserver.getNextPossibleActions();
 
 	// start loop here
 	while (true)
 	{
 		// enter number
 		std::string input = "";
-		std::cout << "Please enter an string value: ";
-		getline(std::cin, input);
-		if (input == "q") {
-			return 1;
-		}
-		//std::cin >> i;
+		//std::cout << "Please enter an string value: ";
+		//getline(std::cin, input);
+		//if (input == "q") {
+		//	return 1;
+		//}
 		// make transistion
-		//std::cout << input;
+		//choose random input from sensitivitylist;
+		input =	sensitivityList.at(rand() % sensitivityList.size());
+
 		communicationserver.makeTransition(input);
 		communicationserver.getSensitiveLists();
 
 		// getNextPossibleActions()
-		communicationserver.getNextPossibleActions();
+		sensitivityList.clear();
+		sensitivityList = communicationserver.getNextPossibleActions();
 	}
 
 	return 1;

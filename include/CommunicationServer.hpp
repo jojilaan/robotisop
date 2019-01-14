@@ -16,7 +16,7 @@ public:
 	void nextState(int);
 	void init();
 	void getSensitiveLists();
-	void getNextPossibleActions();
+	std::vector<std::string> getNextPossibleActions();
 	void makeTransition(std::string trans);
 
 private:

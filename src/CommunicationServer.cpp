@@ -80,7 +80,7 @@ void CommunicationServer::getSensitiveLists()
 	}
 }
 
-void CommunicationServer::getNextPossibleActions()
+std::vector<std::string> CommunicationServer::getNextPossibleActions()
 {
 	nextPossibleActions.clear();
 
@@ -115,12 +115,16 @@ void CommunicationServer::getNextPossibleActions()
 		}
 	}
 
+	std::vector<std::string> list;
 	std::cout << "Next possible transitions:[ ";
 	for (auto &x : nextPossibleActions)
 	{
+		list.push_back(x.first);
 		std::cout << x.first << ' ';
+
 	}
 	std::cout << " ]\n";
+	return list;
 }
 
 void CommunicationServer::makeTransition(std::string requestedAction)
