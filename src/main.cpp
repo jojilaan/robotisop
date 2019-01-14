@@ -257,7 +257,7 @@ int main()
 			input =	sensitivityList.at(rand() % sensitivityList.size());
 		else
 		{
-			int in = atoi(&input.c_str());
+			int in = atoi(input.c_str());
 			if(in > 0)
 			{
 				input = sensitivityList.at(in-1);
