@@ -146,7 +146,7 @@ int main()
 	alphabet.push_back("ShoulderPOutPosition"); // 2
 	alphabet.push_back("Execute"); // 3
 	alphabet.push_back("ShoulderROutPosition"); // 4
-	alphabet.push_back("ElbowInPositon"); // 5
+	alphabet.push_back("ElbowInPosition"); // 5
 	alphabet.push_back("ElbowOutPosition"); // 6
 
 
@@ -253,15 +253,25 @@ int main()
 		}
 		// make transistion
 		//choose random input from sensitivitylist;
-		//input =	sensitivityList.at(rand() % sensitivityList.size());
+		if(input == "")
+			input =	sensitivityList.at(rand() % sensitivityList.size());
+		else
+		{
+			int in = atoi(&input);
+			if(in > 0)
+			{
+				input = sensitivityList.at(in-1);
+			}
+		}
+		//choose by number
 
 		communicationserver.makeTransition(input);
 		communicationserver.getSensitiveLists();
 
-		communicationserver.getNextPossibleActions();
+		//communicationserver.getNextPossibleActions();
 		// getNextPossibleActions()
-		//sensitivityList.clear();
-		//sensitivityList = communicationserver.getNextPossibleActions();
+		sensitivityList.clear();
+		sensitivityList = communicationserver.getNextPossibleActions();
 	}
 
 	return 1;
