@@ -222,6 +222,8 @@ int main()
 	hds.rElbowOut();
 	hds.lElbowOut();
 
+	usleep(1000000);
+
 	hds.rElbowIn();
 	hds.lElbowIn();
 
