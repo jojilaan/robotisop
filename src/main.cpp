@@ -212,10 +212,22 @@ int main()
 
 	hds.init();
 	hds.beginPosition();
+
 	hds.rShoulderRollOut();
+	hds.lShoulderRollOut();
+
 	hds.rShoulderTurnOut();
+	hds.lShoulderTurnOut();
+
 	hds.rElbowOut();
+	hds.lElbowOut();
+
 	hds.rElbowIn();
+	hds.lElbowIn();
+
 	hds.rShoulderTurnIn();
+	hds.lShoulderTurnIn();
+
 	hds.rShoulderRollIn();
+	hds.lShoulderRollIn();
 }
