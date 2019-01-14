@@ -16,7 +16,8 @@ bool HDS::dxlPowerOn()
 	Packet packet = Packet(ID_CM, Packet::WRITE, P_DXL_POWER, static_cast<unsigned char>(1));
 	if (_connection.transferPacket(packet))
 	{
-		std::cout << "SUCCES" << std::endl;
+		if (debug)
+			std::cout << "dxlPowerOn() succes" << std::endl;
 		packet = Packet(ID_CM, Packet::WRITEW, P_LED_HEAD_L, (int)((((0 & 0xFF) >> 3) << 10) | (((128 & 0xFF) >> 3) << 5) | ((255 & 0xFF) >> 3)));
 		_connection.transferPacket(packet);
 
@@ -25,7 +26,8 @@ bool HDS::dxlPowerOn()
 	}
 	else
 	{
-		std::cout << "DXL Power on failed" << std::endl;
+		if (debug)
+			std::cout << "dxlPowerOn() failed" << std::endl;
 		_connection.closeConnection();
 
 		return false;
@@ -88,58 +90,58 @@ void HDS::init()
 	std::cout << "set P_GAIN" << std::endl;
 
 	Packet packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_SHOULDER_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_SHOULDER_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_ELBOW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_HIP_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_HIP_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_HIP_YAW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_KNEE, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_ANKLE_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_R_ANKLE_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_HIP_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_HIP_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_HIP_YAW, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_KNEE, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_ANKLE_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 	packet = Packet(ID_L_ANKLE_ROLL, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
-	if (_connection.transferPacket(packet))
+	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;
 
 	std::cout << "lock legs" << std::endl;
@@ -213,7 +215,7 @@ void HDS::shouldersOutward()
 
 void HDS::elbowsUp()
 {
-	std::cout << "shouldersDown()" << std::endl;
+	std::cout << "elbowsUp()" << std::endl;
 
 	usleep(1000000);
 
@@ -223,7 +225,7 @@ void HDS::elbowsUp()
 
 void HDS::elbowsDown()
 {
-	std::cout << "shouldersDown()" << std::endl;
+	std::cout << "elbowsDown()" << std::endl;
 
 	usleep(1000000);
 
