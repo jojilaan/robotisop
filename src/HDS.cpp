@@ -185,89 +185,65 @@ void HDS::beginPosition()
 	moveServo(ID_L_ELBOW, 3107);
 }
 
+void HDS::doPollMove(unsigned char id, int value)
+{
+	moveServo(id, value);
+	while (true)
+	{
+		if (abs(readServo(id) - value) <= 10)
+		{
+			break;
+		}
+	}
+}
+
 void HDS::rShoulderRollOut()
 {
-	moveServo(ID_R_SHOULDER_ROLL, 2562);
-	do
-	{
-	} while (abs(readServo(ID_R_SHOULDER_ROLL) - 2562) <= 10);
+	doPollMove(ID_R_SHOULDER_ROLL, 2562);
 }
 void HDS::rShoulderRollIn()
 {
-	moveServo(ID_R_SHOULDER_ROLL, 1560);
-	do
-	{
-	} while (abs(readServo(ID_R_SHOULDER_ROLL) - 1560) <= 10);
+	doPollMove(ID_R_SHOULDER_ROLL, 1560);
 }
 void HDS::rShoulderTurnOut()
 {
-	moveServo(ID_R_SHOULDER_PITCH, 963);
-	do
-	{
-	} while (abs(readServo(ID_R_SHOULDER_PITCH) - 963) <= 10);
+	doPollMove(ID_R_SHOULDER_PITCH, 963);
 }
 void HDS::rShoulderTurnIn()
 {
-	moveServo(ID_R_SHOULDER_PITCH, 1948);
-	do
-	{
-	} while (abs(readServo(ID_R_SHOULDER_PITCH) - 1948) <= 10);
+	doPollMove(ID_R_SHOULDER_PITCH, 1948);
 }
 void HDS::rElbowOut()
 {
-	moveServo(ID_R_ELBOW, 2043);
-	do
-	{
-	} while (abs(readServo(ID_R_ELBOW) - 2043) <= 10);
+	doPollMove(ID_R_ELBOW, 2043);
 }
 void HDS::rElbowIn()
 {
-	moveServo(ID_R_ELBOW, 980);
-	do
-	{
-	} while (abs(readServo(ID_R_ELBOW) - 980) <= 10);
+	doPollMove(ID_R_ELBOW, 980);
 }
 void HDS::lShoulderRollOut()
 {
-	moveServo(ID_L_SHOULDER_ROLL, 1520);
-	do
-	{
-	} while (abs(readServo(ID_L_SHOULDER_ROLL) - 1520) <= 10);
+	doPollMove(ID_L_SHOULDER_ROLL, 1520);
 }
 void HDS::lShoulderRollIn()
 {
-	moveServo(ID_L_SHOULDER_ROLL, 2534);
-	do
-	{
-	} while (abs(readServo(ID_L_SHOULDER_ROLL) - 2534) <= 10);
+	doPollMove(ID_L_SHOULDER_ROLL, 2534);
 }
 void HDS::lShoulderTurnOut()
 {
-	moveServo(ID_L_SHOULDER_PITCH, 1067);
-	do
-	{
-	} while (abs(readServo(ID_L_SHOULDER_PITCH) - 1067) <= 10);
+	doPollMove(ID_L_SHOULDER_PITCH, 1067);
 }
 void HDS::lShoulderTurnIn()
 {
-	moveServo(ID_L_SHOULDER_PITCH, 2127);
-	do
-	{
-	} while (abs(readServo(ID_L_SHOULDER_PITCH) - 2127) <= 10);
+	doPollMove(ID_L_SHOULDER_PITCH, 2127);
 }
 void HDS::lElbowOut()
 {
-	moveServo(ID_L_ELBOW, 2063);
-	do
-	{
-	} while (abs(readServo(ID_L_ELBOW) - 2063) <= 10);
+	doPollMove(ID_L_ELBOW, 2063);
 }
 void HDS::lElbowIn()
 {
-	moveServo(ID_L_ELBOW, 3107);
-	do
-	{
-	} while (abs(readServo(ID_L_ELBOW) - 3107) <= 10);
+	doPollMove(ID_L_ELBOW, 3107);
 }
 
 void HDS::makeTransition(std::string trans)
