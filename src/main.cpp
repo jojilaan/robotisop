@@ -210,5 +210,12 @@ int main()
 {
 	HDS hds = HDS("/dev/ttyUSB0");
 
-	hds.readArms();
+	hds.init();
+	hds.beginPosition();
+	hds.rShoulderRollOut();
+	hds.rShoulderTurnOut();
+	hds.rElbowOut();
+	hds.rElbowIn();
+	hds.rShoulderTurnIn();
+	hds.rShoulderRollIn();
 }
