@@ -81,6 +81,17 @@ bool HDS::readMoveServo(unsigned char id)
 	return true;
 }
 
+void HDS::readArms()
+{
+	dxlPowerOn();
+	std::cout << "ID_R_SHOULDER_PITCH: " << readServo(ID_R_SHOULDER_PITCH) << std::endl;
+	std::cout << "ID_L_SHOULDER_PITCH: " << readServo(ID_L_SHOULDER_PITCH) << std::endl;
+	std::cout << "ID_R_SHOULDER_ROLL: " << readServo(ID_R_SHOULDER_ROLL) << std::endl;
+	std::cout << "ID_L_SHOULDER_ROLL: " << readServo(ID_L_SHOULDER_ROLL) << std::endl;
+	std::cout << "ID_R_ELBOW: " << readServo(ID_R_ELBOW) << std::endl;
+	std::cout << "ID_L_ELBOW: " << readServo(ID_L_ELBOW) << std::endl;
+}
+
 void HDS::init()
 {
 	dxlPowerOn();
@@ -158,14 +169,6 @@ void HDS::init()
 	readMoveServo(ID_L_KNEE);
 	readMoveServo(ID_L_ANKLE_PITCH);
 	readMoveServo(ID_L_ANKLE_ROLL);
-
-	std::cout << "ID_R_SHOULDER_PITCH: " << readServo(ID_R_SHOULDER_PITCH) << std::endl;
-	std::cout << "ID_L_SHOULDER_PITCH: " << readServo(ID_L_SHOULDER_PITCH) << std::endl;
-	std::cout << "ID_R_SHOULDER_ROLL: " << readServo(ID_R_SHOULDER_ROLL) << std::endl;
-	std::cout << "ID_L_SHOULDER_ROLL: " << readServo(ID_L_SHOULDER_ROLL) << std::endl;
-	std::cout << "ID_R_ELBOW: " << readServo(ID_R_ELBOW) << std::endl;
-	std::cout << "ID_L_ELBOW: " << readServo(ID_L_ELBOW) << std::endl;
-
 }
 
 void HDS::beginPosition()

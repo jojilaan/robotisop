@@ -64,8 +64,9 @@ public:
 	HDS(std::string portname);
 	~HDS();
 	void init();
+	void readArms();
 	void beginPosition();
-	
+
 	void rShoulderRollOut();
 	void lShoulderRollOut();
 	void rShoulderRollIn();
