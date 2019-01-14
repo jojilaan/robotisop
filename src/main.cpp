@@ -19,7 +19,8 @@ int **LSchouderR;
 int **RSchouderR;
 int **Lelleboog;
 int **Relleboog;
-int **ToReady;
+int **LeftToReady;
+int **RightToReady;
 
 void initProcs()
 {
@@ -106,30 +107,30 @@ void initProcs()
 	LeftToReady[4][5] = 5;
 	LeftToReady[5][6] = 2;
 
-	RightToReadyR = new int *[6];
+	RightToReady = new int *[6];
 	for (int i = 0; i < 6; i++)
 	{
-		RightToReadyR[i] = new int[7];
+		RightToReady[i] = new int[7];
 	}
 
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 7; j++)
 		{
-			RightToReadyR[i][j] = -1;
+			RightToReady[i][j] = -1;
 		}
 	}
 
-	RightToReadyR[0][0] = 1;
-	RightToReadyR[1][1] = 2;
-	RightToReadyR[2][2] = 3;
-	RightToReadyR[2][3] = 4;
-	RightToReadyR[3][4] = 0;
-	RightToReadyR[4][5] = 5;
-	RightToReadyR[5][6] = 2;
+	RightToReady[0][0] = 1;
+	RightToReady[1][1] = 2;
+	RightToReady[2][2] = 3;
+	RightToReady[2][3] = 4;
+	RightToReady[3][4] = 0;
+	RightToReady[4][5] = 5;
+	RightToReady[5][6] = 2;
 }
 
-int not_main()
+int main()
 {
 
 	CommunicationServer communicationserver;
@@ -204,7 +205,7 @@ int not_main()
 	/* proc6 begin */
 
 	/* proc7 begin */
-	Process proc7("ToReady", LeftToReady, 6);
+	Process proc7("LeftToReady", LeftToReady, 6);
 	procAlphabet.push_back("left." + alphabet.at(0));
 	procAlphabet.push_back("left." + alphabet.at(1));
 	procAlphabet.push_back("left." + alphabet.at(2));
@@ -218,7 +219,7 @@ int not_main()
 	/* proc7 begin */
 
 	/* proc8 begin */
-	Process proc8("ToReady", LeftToReady, 6);
+	Process proc8("RightToReady", RightToReady, 6);
 	procAlphabet.push_back("right." + alphabet.at(0));
 	procAlphabet.push_back("right." + alphabet.at(1));
 	procAlphabet.push_back("right." + alphabet.at(2));
@@ -242,52 +243,25 @@ int not_main()
 	// start loop here
 	while (true)
 	{
-		// // enter number
-		// std::string input = "";
-		// //std::cout << "Please enter an string value: ";
-		// //getline(std::cin, input);
-		// //if (input == "q") {
-		// //	return 1;
-		// //}
-		// // make transistion
-		// //choose random input from sensitivitylist;
-		// input =	sensitivityList.at(rand() % sensitivityList.size());
+		// enter number
+		std::string input = "";
+		std::cout << "Please enter an string value: ";
+		getline(std::cin, input);
+		if (input == "q") {
+			return 1;
+		}
+		// make transistion
+		//choose random input from sensitivitylist;
+		//input =	sensitivityList.at(rand() % sensitivityList.size());
 
-		// communicationserver.makeTransition(input);
-		// communicationserver.getSensitiveLists();
+		communicationserver.makeTransition(input);
+		communicationserver.getSensitiveLists();
 
-		// // getNextPossibleActions()
-		// sensitivityList.clear();
-		// sensitivityList = communicationserver.getNextPossibleActions();
+		communicationserver.getNextPossibleActions();
+		// getNextPossibleActions()
+		//sensitivityList.clear();
+		//sensitivityList = communicationserver.getNextPossibleActions();
 	}
 
 	return 1;
-}
-
-int main()
-{
-	HDS hds = HDS("/dev/ttyUSB0");
-
-	hds.init();
-	hds.beginPosition();
-
-	hds.rShoulderRollOut();
-	hds.lShoulderRollOut();
-
-	hds.rShoulderTurnOut();
-	hds.lShoulderTurnOut();
-
-	hds.rElbowOut();
-	hds.lElbowOut();
-
-	// usleep(1000000);
-
-	hds.rElbowIn();
-	hds.lElbowIn();
-
-	hds.rShoulderTurnIn();
-	hds.lShoulderTurnIn();
-
-	hds.rShoulderRollIn();
-	hds.lShoulderRollIn();
 }
