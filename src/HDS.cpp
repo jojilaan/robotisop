@@ -101,6 +101,7 @@ void HDS::init()
 
 	std::cout << "set P_GAIN" << std::endl;
 
+	// Sets P_GAIN for the arm and leg servomotors
 	Packet packet = Packet(ID_R_SHOULDER_PITCH, Packet::WRITE, P_P_GAIN, static_cast<unsigned char>(8));
 	if (_connection.transferPacket(packet) && debug)
 		std::cout << "SUCCES" << std::endl;

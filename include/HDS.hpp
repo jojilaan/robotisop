@@ -63,21 +63,30 @@ public:
 
 	HDS(std::string portname);
 	~HDS();
+	// Sets P_GAIN for the arm and leg servomotors, runs the dxlPowerOn method and locks the legs
 	void init();
+	// Puts Darwin in its starting position
 	void beginPosition();
+	// Actions
 	void shouldersUp();
 	void shouldersDown();
 	void shouldersInward();
 	void shouldersOutward();
 	void elbowsUp();
 	void elbowsDown();
+	// Performs a transition from the communication server
 	void makeTransition(std::string trans);
 
 private:
+	// Moves the servomotor to the given goal position
 	bool moveServo(unsigned char id, int value);
+	// Reads the present position of the servomotor and returns it
 	int readServo(unsigned char id);
+	// Reads value of a servo and writes the value back to lock the servomotor in its place
 	bool readMoveServo(unsigned char id);
+	// Performs an action and returns when the goal position is reached
 	void doPollMove(unsigned char id, int value);
+	// Turns power on for all servomotors
 	bool dxlPowerOn();
 };
 
