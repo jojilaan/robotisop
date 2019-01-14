@@ -48,7 +48,7 @@ std::string Process::getName()
 std::vector<std::string> Process::getSensitivityList()
 {
 	_sensitivityList.clear();
-	for (int i = 0; i < _alphabet.size(); ++i)
+	for (size_t i = 0; i < _alphabet.size(); ++i)
 	{
 		if (_FSM[_currentState][i] != -1)
 		{
