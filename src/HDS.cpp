@@ -81,6 +81,18 @@ bool HDS::readMoveServo(unsigned char id)
 	return true;
 }
 
+void HDS::doPollMove(unsigned char id, int value)
+{
+	moveServo(id, value);
+	while (true)
+	{
+		if (abs(readServo(id) - value) <= 55)
+		{
+			break;
+		}
+	}
+}
+
 void HDS::readArms()
 {
 	dxlPowerOn();
@@ -183,18 +195,6 @@ void HDS::beginPosition()
 	moveServo(ID_L_SHOULDER_PITCH, 2127);
 	moveServo(ID_L_SHOULDER_ROLL, 2534);
 	moveServo(ID_L_ELBOW, 3107);
-}
-
-void HDS::doPollMove(unsigned char id, int value)
-{
-	moveServo(id, value);
-	while (true)
-	{
-		if (abs(readServo(id) - value) <= 55)
-		{
-			break;
-		}
-	}
 }
 
 void HDS::rShoulderRollOut()
