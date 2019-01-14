@@ -114,7 +114,6 @@ void initProcs()
 	//	std::cout << '\n';
 	//}
 	//ToReady[5][3] = 2;
-
 }
 
 int main()
@@ -174,7 +173,7 @@ int main()
 	Process proc7("ToReady", ToReady, 6);
 	proc7.addAlphabet(alphabet);
 	procs.push_back(proc7);
-	for (auto& proc : procs)
+	for (auto &proc : procs)
 	{
 		communicationserver.addProcess(&proc);
 	}
@@ -202,12 +201,11 @@ int main()
 		// // getNextPossibleActions()
 		// sensitivityList.clear();
 		// sensitivityList = communicationserver.getNextPossibleActions();
-
-		HDS hds = HDS("/dev/ttyUSB0");
-
-		hds.init();
-		hds.beginPosition();
 	}
+
+	HDS hds = HDS("/dev/ttyUSB0");
+
+	hds.init();
 
 	return 1;
 }
