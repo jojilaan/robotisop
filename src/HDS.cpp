@@ -190,7 +190,7 @@ void HDS::doPollMove(unsigned char id, int value)
 	moveServo(id, value);
 	while (true)
 	{
-		if (abs(readServo(id) - value) <= 50)
+		if (abs(readServo(id) - value) <= 55)
 		{
 			break;
 		}
