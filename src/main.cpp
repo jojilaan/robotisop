@@ -116,7 +116,7 @@ void initProcs()
 	//ToReady[5][3] = 2;
 }
 
-int main()
+int not_main()
 {
 
 	CommunicationServer communicationserver;
@@ -203,9 +203,12 @@ int main()
 		// sensitivityList = communicationserver.getNextPossibleActions();
 	}
 
+	return 1;
+}
+
+int main()
+{
 	HDS hds = HDS("/dev/ttyUSB0");
 
 	hds.init();
-
-	return 1;
 }
