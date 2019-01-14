@@ -81,6 +81,18 @@ bool HDS::readMoveServo(unsigned char id)
 	return true;
 }
 
+void HDS::doPollMove(unsigned char id, int value)
+{
+	moveServo(id, value);
+	while (true)
+	{
+		if (abs(readServo(id) - value) <= 55)
+		{
+			break;
+		}
+	}
+}
+
 void HDS::init()
 {
 	dxlPowerOn();
@@ -178,59 +190,48 @@ void HDS::shouldersUp()
 {
 	std::cout << "shouldersUp()" << std::endl;
 
-	usleep(1000000);
-
 	moveServo(ID_R_SHOULDER_PITCH, 3451);
-	moveServo(ID_L_SHOULDER_PITCH, 625);
+	doPollMove(ID_L_SHOULDER_PITCH, 625);
 }
 
 void HDS::shouldersDown()
 {
 	std::cout << "shouldersDown()" << std::endl;
 
-	usleep(1000000);
-
 	moveServo(ID_R_SHOULDER_PITCH, 1948);
-	moveServo(ID_L_SHOULDER_PITCH, 2127);
+	doPollMove(ID_L_SHOULDER_PITCH, 2127);
 }
 
 void HDS::shouldersInward()
 {
 	std::cout << "shouldersInward()" << std::endl;
 
-	usleep(500000);
 	moveServo(ID_R_SHOULDER_ROLL, 1240);
-	moveServo(ID_L_SHOULDER_ROLL, 2850);
+	doPollMove(ID_L_SHOULDER_ROLL, 2850);
 }
 
 void HDS::shouldersOutward()
 {
 	std::cout << "shouldersOutward()" << std::endl;
 
-	usleep(500000);
-
 	moveServo(ID_R_SHOULDER_ROLL, 1560);
-	moveServo(ID_L_SHOULDER_ROLL, 2534);
+	doPollMove(ID_L_SHOULDER_ROLL, 2534);
 }
 
 void HDS::elbowsUp()
 {
 	std::cout << "elbowsUp()" << std::endl;
 
-	usleep(1000000);
-
 	moveServo(ID_R_ELBOW, 1480);
-	moveServo(ID_L_ELBOW, 2621);
+	doPollMove(ID_L_ELBOW, 2621);
 }
 
 void HDS::elbowsDown()
 {
 	std::cout << "elbowsDown()" << std::endl;
 
-	usleep(1000000);
-
 	moveServo(ID_R_ELBOW, 980);
-	moveServo(ID_L_ELBOW, 3107);
+	doPollMove(ID_L_ELBOW, 3107);
 }
 
 void HDS::makeTransition(std::string trans)

@@ -77,6 +77,7 @@ private:
 	bool moveServo(unsigned char id, int value);
 	int readServo(unsigned char id);
 	bool readMoveServo(unsigned char id);
+	void doPollMove(unsigned char id, int value);
 	bool dxlPowerOn();
 };
 
