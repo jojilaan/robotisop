@@ -252,7 +252,7 @@ int main()
 			return 1;
 		}
 		// make transistion
-		//choose random input from sensitivitylist;
+		//choose random if no input else at number;
 		if(input == "")
 			input =	sensitivityList.at(rand() % sensitivityList.size());
 		else
@@ -263,9 +263,10 @@ int main()
 				input = sensitivityList.at(in-1);
 			}
 		}
-		//choose by number
 
+		//try to make rquested transition
 		communicationserver.makeTransition(input);
+		//get the new sensitivity list
 		communicationserver.getSensitiveLists();
 
 		//communicationserver.getNextPossibleActions();
