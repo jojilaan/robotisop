@@ -248,4 +248,52 @@ void HDS::lElbowIn()
 
 void HDS::makeTransition(std::string trans)
 {
+	if (trans == "left.ShoulderRInPosition")
+	{
+		lShoulderRollOut();
+	}
+	else if (trans == "left.ShoulderROutPosition")
+	{
+		lShoulderRollIn();
+	}
+	else if (trans == "left.ShoulderPInPosition")
+	{
+		lShoulderTurnOut();
+	}
+	else if (trans == "left.ShoulderPOutPosition")
+	{
+		lShoulderTurnIn();
+	}
+	else if (trans == "left.ElbowInPositon")
+	{
+		lElbowOut();
+	}
+	else if (trans == "left.ElbowOutPosition")
+	{
+		lElbowIn();
+	}
+	else if (trans == "right.ShoulderRInPosition")
+	{
+		rShoulderRollOut();
+	}
+	else if (trans == "right.ShoulderROutPosition")
+	{
+		rShoulderRollIn();
+	}
+	else if (trans == "right.ShoulderPInPosition")
+	{
+		rShoulderTurnOut();
+	}
+	else if (trans == "right.ShoulderPOutPosition")
+	{
+		rShoulderTurnIn();
+	}
+	else if (trans == "right.ElbowInPositon")
+	{
+		rElbowOut();
+	}
+	else if (trans == "right.ElbowOutPosition")
+	{
+		rElbowIn();
+	}
 }
