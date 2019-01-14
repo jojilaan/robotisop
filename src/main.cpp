@@ -129,7 +129,7 @@ void initProcs()
 	RightToReadyR[5][6] = 2;
 }
 
-int main()
+int not_main()
 {
 
 	CommunicationServer communicationserver;
@@ -261,9 +261,33 @@ int main()
 		// sensitivityList = communicationserver.getNextPossibleActions();
 	}
 
+	return 1;
+}
+
+int main()
+{
 	HDS hds = HDS("/dev/ttyUSB0");
 
 	hds.init();
+	hds.beginPosition();
 
-	return 1;
+	hds.rShoulderRollOut();
+	hds.lShoulderRollOut();
+
+	hds.rShoulderTurnOut();
+	hds.lShoulderTurnOut();
+
+	hds.rElbowOut();
+	hds.lElbowOut();
+
+	// usleep(1000000);
+
+	hds.rElbowIn();
+	hds.lElbowIn();
+
+	hds.rShoulderTurnIn();
+	hds.lShoulderTurnIn();
+
+	hds.rShoulderRollIn();
+	hds.lShoulderRollIn();
 }

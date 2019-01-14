@@ -64,19 +64,20 @@ public:
 	HDS(std::string portname);
 	~HDS();
 	void init();
+	void readArms();
 	void beginPosition();
-	
+
 	void rShoulderRollOut();
-	void lShoulderRollOut();
 	void rShoulderRollIn();
-	void lShoulderRollIn();
-	void rShoulderTurnIn();
-	void lShoulderTurnIn();
 	void rShoulderTurnOut();
-	void lShoulderTurnOut();
+	void rShoulderTurnIn();
 	void rElbowOut();
-	void lElbowOut();
 	void rElbowIn();
+	void lShoulderRollOut();
+	void lShoulderRollIn();
+	void lShoulderTurnOut();
+	void lShoulderTurnIn();
+	void lElbowOut();
 	void lElbowIn();
 
 	void makeTransition(std::string trans);
