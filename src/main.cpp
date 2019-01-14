@@ -84,36 +84,49 @@ void initProcs()
 	Relleboog[1][0] = -1;
 	Relleboog[1][1] = 0;
 
-	ToReady = new int *[6];
+	LeftToReady = new int *[6];
 	for (int i = 0; i < 6; i++)
 	{
-		ToReady[i] = new int[7];
+		LeftToReady[i] = new int[7];
 	}
 
 	for (int i = 0; i < 6; i++)
 	{
 		for (int j = 0; j < 7; j++)
 		{
-			ToReady[i][j] = -1;
+			LeftToReady[i][j] = -1;
 		}
 	}
 
-	ToReady[0][0] = 1;
-	ToReady[1][1] = 2;
-	ToReady[2][2] = 3;
-	ToReady[2][3] = 4;
-	ToReady[3][4] = 0;
-	ToReady[4][5] = 5;
-	ToReady[5][6] = 2;
-	//for (int i = 0; i < 6; i++)
-	//{
-	//	for (int j = 0; j < 7; j++)
-	//	{
-	//		std::cout << " | "<< ToReady[i][j];
-	//	}
-	//	std::cout << '\n';
-	//}
-	//ToReady[5][3] = 2;
+	LeftToReady[0][0] = 1;
+	LeftToReady[1][1] = 2;
+	LeftToReady[2][2] = 3;
+	LeftToReady[2][3] = 4;
+	LeftToReady[3][4] = 0;
+	LeftToReady[4][5] = 5;
+	LeftToReady[5][6] = 2;
+
+	RightToReadyR = new int *[6];
+	for (int i = 0; i < 6; i++)
+	{
+		RightToReadyR[i] = new int[7];
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			RightToReadyR[i][j] = -1;
+		}
+	}
+
+	RightToReadyR[0][0] = 1;
+	RightToReadyR[1][1] = 2;
+	RightToReadyR[2][2] = 3;
+	RightToReadyR[2][3] = 4;
+	RightToReadyR[3][4] = 0;
+	RightToReadyR[4][5] = 5;
+	RightToReadyR[5][6] = 2;
 }
 
 int main()
@@ -125,54 +138,99 @@ int main()
 	initProcs();
 	std::vector<Process> procs;
 	std::vector<std::string> alphabet;
+	std::vector<std::string> procAlphabet;
 	std::vector<std::string> sensitivityList;
+	alphabet.push_back("ShoulderRInPosition"); // 0
+	alphabet.push_back("ShoulderROutPosition"); // 1
+	alphabet.push_back("ShoulderPInPosition"); // 2
+	alphabet.push_back("ShoulderPOutPosition"); // 3
+	alphabet.push_back("Execute"); // 4
+	alphabet.push_back("ElbowInPositon"); // 5
+	alphabet.push_back("ElbowOutPosition"); // 6
 
-	alphabet.push_back("schouderPomhoog");
-	alphabet.push_back("schouderPomlaag");
 
-	//maybe alphabet.size() can be buggy, need research
-	Process proc("LSchouderP", LSchouderP, alphabet.size());
-	proc.addAlphabet(alphabet);
-
+	/* proc1 begin */
+	Process proc("LSchouderP", LSchouderP, 2);
+	procAlphabet.push_back("left." + alphabet.at(2));
+	procAlphabet.push_back("left." + alphabet.at(3));
+	proc.addAlphabet(procAlphabet);
 	procs.push_back(proc);
+	procAlphabet.clear();
+	/* proc1 end */
 
-	Process proc2("RSchouderP", RSchouderP, alphabet.size());
-	proc2.addAlphabet(alphabet);
+	/* proc2 begin */
+	Process proc2("RSchouderP", RSchouderP, 2);
+	procAlphabet.push_back("right." + alphabet.at(2));
+	procAlphabet.push_back("right." + alphabet.at(3));
+	proc2.addAlphabet(procAlphabet);
 	procs.push_back(proc2);
+	procAlphabet.clear();
+	/* proc2 begin */
 
-	alphabet.clear();
-	alphabet.push_back("schouderRomhoog");
-	alphabet.push_back("schouderRomlaag");
-	Process proc3("LSchouderR", LSchouderR, alphabet.size());
-	proc3.addAlphabet(alphabet);
+	/* proc3 begin */
+	Process proc3("LSchouderR", LSchouderR, 2);
+	procAlphabet.push_back("left." + alphabet.at(0));
+	procAlphabet.push_back("left." + alphabet.at(1));
+	proc3.addAlphabet(procAlphabet);
 	procs.push_back(proc3);
+	procAlphabet.clear();
+	/* proc3 begin */
 
-	Process proc4("RSchouderR", RSchouderR, alphabet.size());
-	proc4.addAlphabet(alphabet);
+	/* proc4 begin */
+	Process proc4("RSchouderR", RSchouderR, 2);
+	procAlphabet.push_back("right." + alphabet.at(0));
+	procAlphabet.push_back("right." + alphabet.at(1));
+	proc4.addAlphabet(procAlphabet);
 	procs.push_back(proc4);
+	procAlphabet.clear();
+	/* proc4 begin */
 
-	alphabet.clear();
-	alphabet.push_back("elleboogOmhoog");
-	alphabet.push_back("elleboogOmlaag");
-	Process proc5("Lelleboog", Lelleboog, alphabet.size());
-	proc5.addAlphabet(alphabet);
+	/* proc5 begin */
+	Process proc5("Lelleboog", Lelleboog, 2);
+	procAlphabet.push_back("left." + alphabet.at(5));
+	procAlphabet.push_back("left." + alphabet.at(6));
+	proc5.addAlphabet(procAlphabet);
 	procs.push_back(proc5);
+	procAlphabet.clear();
+	/* proc5 begin */
 
-	Process proc6("Relleboog", Relleboog, alphabet.size());
-	proc6.addAlphabet(alphabet);
+	/* proc6 begin */
+	Process proc6("Relleboog", Relleboog, 2);
+	procAlphabet.push_back("right." + alphabet.at(5));
+	procAlphabet.push_back("right." + alphabet.at(6));
+	proc6.addAlphabet(procAlphabet);
 	procs.push_back(proc6);
-	alphabet.clear();
-	alphabet.push_back("schouderPomhoog");
-	alphabet.push_back("elleboogOmhoog");
-	alphabet.push_back("elleboogOmlaag");
-	alphabet.push_back("klappen");
-	alphabet.push_back("schouderPomlaag");
-	alphabet.push_back("schouderRomhoog");
-	alphabet.push_back("schouderRomlaag");
+	procAlphabet.clear();
+	/* proc6 begin */
 
-	Process proc7("ToReady", ToReady, 6);
-	proc7.addAlphabet(alphabet);
+	/* proc7 begin */
+	Process proc7("ToReady", LeftToReady, 6);
+	procAlphabet.push_back("left." + alphabet.at(0));
+	procAlphabet.push_back("left." + alphabet.at(1));
+	procAlphabet.push_back("left." + alphabet.at(2));
+	procAlphabet.push_back("left." + alphabet.at(3));
+	procAlphabet.push_back("left." + alphabet.at(4));
+	procAlphabet.push_back("left." + alphabet.at(5));
+	procAlphabet.push_back("left." + alphabet.at(6));
+	proc7.addAlphabet(procAlphabet);
 	procs.push_back(proc7);
+	procAlphabet.clear();
+	/* proc7 begin */
+
+	/* proc8 begin */
+	Process proc8("ToReady", LeftToReady, 6);
+	procAlphabet.push_back("right." + alphabet.at(0));
+	procAlphabet.push_back("right." + alphabet.at(1));
+	procAlphabet.push_back("right." + alphabet.at(2));
+	procAlphabet.push_back("right." + alphabet.at(3));
+	procAlphabet.push_back("right." + alphabet.at(4));
+	procAlphabet.push_back("right." + alphabet.at(5));
+	procAlphabet.push_back("right." + alphabet.at(6));
+	proc8.addAlphabet(procAlphabet);
+	procs.push_back(proc8);
+	procAlphabet.clear();
+	/* proc8 begin */
+
 	for (auto &proc : procs)
 	{
 		communicationserver.addProcess(&proc);
