@@ -65,12 +65,20 @@ public:
 	~HDS();
 	void init();
 	void beginPosition();
-	void shouldersUp();
-	void shouldersDown();
-	void shouldersInward();
-	void shouldersOutward();
-	void elbowsUp();
-	void elbowsDown();
+	
+	void rShoulderRollOut();
+	void lShoulderRollOut();
+	void rShoulderRollIn();
+	void lShoulderRollIn();
+	void rShoulderTurnIn();
+	void lShoulderTurnIn();
+	void rShoulderTurnOut();
+	void lShoulderTurnOut();
+	void rElbowOut();
+	void lElbowOut();
+	void rElbowIn();
+	void lElbowIn();
+
 	void makeTransition(std::string trans);
 
 private:

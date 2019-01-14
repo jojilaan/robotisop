@@ -185,23 +185,28 @@ int main()
 	// start loop here
 	while (true)
 	{
-		// enter number
-		std::string input = "";
-		//std::cout << "Please enter an string value: ";
-		//getline(std::cin, input);
-		//if (input == "q") {
-		//	return 1;
-		//}
-		// make transistion
-		//choose random input from sensitivitylist;
-		input =	sensitivityList.at(rand() % sensitivityList.size());
+		// // enter number
+		// std::string input = "";
+		// //std::cout << "Please enter an string value: ";
+		// //getline(std::cin, input);
+		// //if (input == "q") {
+		// //	return 1;
+		// //}
+		// // make transistion
+		// //choose random input from sensitivitylist;
+		// input =	sensitivityList.at(rand() % sensitivityList.size());
 
-		communicationserver.makeTransition(input);
-		communicationserver.getSensitiveLists();
+		// communicationserver.makeTransition(input);
+		// communicationserver.getSensitiveLists();
 
-		// getNextPossibleActions()
-		sensitivityList.clear();
-		sensitivityList = communicationserver.getNextPossibleActions();
+		// // getNextPossibleActions()
+		// sensitivityList.clear();
+		// sensitivityList = communicationserver.getNextPossibleActions();
+
+		HDS hds = HDS("/dev/ttyUSB0");
+
+		hds.init();
+		hds.beginPosition();
 	}
 
 	return 1;

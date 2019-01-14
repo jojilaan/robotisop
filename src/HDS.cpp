@@ -158,6 +158,14 @@ void HDS::init()
 	readMoveServo(ID_L_KNEE);
 	readMoveServo(ID_L_ANKLE_PITCH);
 	readMoveServo(ID_L_ANKLE_ROLL);
+
+	std::cout << "" << readServo(ID_R_SHOULDER_PITCH) << std::endl;
+	std::cout << "" << readServo(ID_L_SHOULDER_PITCH) << std::endl;
+	std::cout << "" << readServo(ID_R_SHOULDER_ROLL) << std::endl;
+	std::cout << "" << readServo(ID_L_SHOULDER_ROLL) << std::endl;
+	std::cout << "" << readServo(ID_R_ELBOW) << std::endl;
+	std::cout << "" << readServo(ID_L_ELBOW) << std::endl;
+
 }
 
 void HDS::beginPosition()
@@ -174,89 +182,20 @@ void HDS::beginPosition()
 	moveServo(ID_L_ELBOW, 3107);
 }
 
-void HDS::shouldersUp()
-{
-	std::cout << "shouldersUp()" << std::endl;
-
-	usleep(1000000);
-
-	moveServo(ID_R_SHOULDER_PITCH, 3451);
-	moveServo(ID_L_SHOULDER_PITCH, 625);
-}
-
-void HDS::shouldersDown()
-{
-	std::cout << "shouldersDown()" << std::endl;
-
-	usleep(1000000);
-
-	moveServo(ID_R_SHOULDER_PITCH, 1948);
-	moveServo(ID_L_SHOULDER_PITCH, 2127);
-}
-
-void HDS::shouldersInward()
-{
-	std::cout << "shouldersInward()" << std::endl;
-
-	usleep(500000);
-	moveServo(ID_R_SHOULDER_ROLL, 1240);
-	moveServo(ID_L_SHOULDER_ROLL, 2850);
-}
-
-void HDS::shouldersOutward()
-{
-	std::cout << "shouldersOutward()" << std::endl;
-
-	usleep(500000);
-
-	moveServo(ID_R_SHOULDER_ROLL, 1560);
-	moveServo(ID_L_SHOULDER_ROLL, 2534);
-}
-
-void HDS::elbowsUp()
-{
-	std::cout << "elbowsUp()" << std::endl;
-
-	usleep(1000000);
-
-	moveServo(ID_R_ELBOW, 1480);
-	moveServo(ID_L_ELBOW, 2621);
-}
-
-void HDS::elbowsDown()
-{
-	std::cout << "elbowsDown()" << std::endl;
-
-	usleep(1000000);
-
-	moveServo(ID_R_ELBOW, 980);
-	moveServo(ID_L_ELBOW, 3107);
-}
+	void HDS::rShoulderRollOut() {}
+	void HDS::lShoulderRollOut() {}
+	void HDS::rShoulderRollIn() {}
+	void HDS::lShoulderRollIn() {}
+	void HDS::rShoulderTurnIn() {}
+	void HDS::lShoulderTurnIn() {}
+	void HDS::rShoulderTurnOut() {}
+	void HDS::lShoulderTurnOut() {}
+	void HDS::rElbowOut() {}
+	void HDS::lElbowOut() {}
+	void HDS::rElbowIn() {}
+	void HDS::lElbowIn() {}
 
 void HDS::makeTransition(std::string trans)
 {
-	if (trans == "schouderPomhoog")
-	{
-		shouldersUp();
-	}
-	if (trans == "schouderPomlaag")
-	{
-		shouldersDown();
-	}
-	if (trans == "elleboogOmhoog")
-	{
-		elbowsUp();
-	}
-	if (trans == "elleboogOmlaag")
-	{
-		elbowsDown();
-	}
-	if (trans == "schouderRomhoog")
-	{
-		shouldersInward();
-	}
-	if (trans == "schouderRomlaag")
-	{
-		shouldersOutward();
-	}
+
 }
