@@ -142,18 +142,18 @@ int main()
 	std::vector<std::string> procAlphabet;
 	std::vector<std::string> sensitivityList;
 	alphabet.push_back("ShoulderRInPosition"); // 0
-	alphabet.push_back("ShoulderROutPosition"); // 1
-	alphabet.push_back("ShoulderPInPosition"); // 2
-	alphabet.push_back("ShoulderPOutPosition"); // 3
-	alphabet.push_back("Execute"); // 4
+	alphabet.push_back("ShoulderPInPosition"); // 1
+	alphabet.push_back("ShoulderPOutPosition"); // 2
+	alphabet.push_back("Execute"); // 3
+	alphabet.push_back("ShoulderROutPosition"); // 4
 	alphabet.push_back("ElbowInPositon"); // 5
 	alphabet.push_back("ElbowOutPosition"); // 6
 
 
 	/* proc1 begin */
 	Process proc("LSchouderP", LSchouderP, 2);
+	procAlphabet.push_back("left." + alphabet.at(1));
 	procAlphabet.push_back("left." + alphabet.at(2));
-	procAlphabet.push_back("left." + alphabet.at(3));
 	proc.addAlphabet(procAlphabet);
 	procs.push_back(proc);
 	procAlphabet.clear();
@@ -161,8 +161,8 @@ int main()
 
 	/* proc2 begin */
 	Process proc2("RSchouderP", RSchouderP, 2);
+	procAlphabet.push_back("right." + alphabet.at(1));
 	procAlphabet.push_back("right." + alphabet.at(2));
-	procAlphabet.push_back("right." + alphabet.at(3));
 	proc2.addAlphabet(procAlphabet);
 	procs.push_back(proc2);
 	procAlphabet.clear();
@@ -171,7 +171,7 @@ int main()
 	/* proc3 begin */
 	Process proc3("LSchouderR", LSchouderR, 2);
 	procAlphabet.push_back("left." + alphabet.at(0));
-	procAlphabet.push_back("left." + alphabet.at(1));
+	procAlphabet.push_back("left." + alphabet.at(4));
 	proc3.addAlphabet(procAlphabet);
 	procs.push_back(proc3);
 	procAlphabet.clear();
@@ -180,7 +180,7 @@ int main()
 	/* proc4 begin */
 	Process proc4("RSchouderR", RSchouderR, 2);
 	procAlphabet.push_back("right." + alphabet.at(0));
-	procAlphabet.push_back("right." + alphabet.at(1));
+	procAlphabet.push_back("right." + alphabet.at(4));
 	proc4.addAlphabet(procAlphabet);
 	procs.push_back(proc4);
 	procAlphabet.clear();
@@ -205,7 +205,7 @@ int main()
 	/* proc6 begin */
 
 	/* proc7 begin */
-	Process proc7("LeftToReady", LeftToReady, 6);
+	Process proc7("ToReady", LeftToReady, 6);
 	procAlphabet.push_back("left." + alphabet.at(0));
 	procAlphabet.push_back("left." + alphabet.at(1));
 	procAlphabet.push_back("left." + alphabet.at(2));
@@ -219,7 +219,7 @@ int main()
 	/* proc7 begin */
 
 	/* proc8 begin */
-	Process proc8("RightToReady", RightToReady, 6);
+	Process proc8("ToReady", LeftToReady, 6);
 	procAlphabet.push_back("right." + alphabet.at(0));
 	procAlphabet.push_back("right." + alphabet.at(1));
 	procAlphabet.push_back("right." + alphabet.at(2));
@@ -231,6 +231,7 @@ int main()
 	procs.push_back(proc8);
 	procAlphabet.clear();
 	/* proc8 begin */
+
 
 	for (auto &proc : procs)
 	{
