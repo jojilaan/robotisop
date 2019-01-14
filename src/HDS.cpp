@@ -207,12 +207,12 @@ void HDS::rShoulderTurnIn()
 }
 void HDS::rElbowOut()
 {
-	usleep(1000000);
+	usleep(750000);
 	moveServo(ID_R_ELBOW, 2043);
 }
 void HDS::rElbowIn()
 {
-	usleep(1000000);
+	usleep(750000);
 	moveServo(ID_R_ELBOW, 980);
 }
 void HDS::lShoulderRollOut()
@@ -237,12 +237,12 @@ void HDS::lShoulderTurnIn()
 }
 void HDS::lElbowOut()
 {
-	usleep(1000000);
+	usleep(750000);
 	moveServo(ID_L_ELBOW, 2063);
 }
 void HDS::lElbowIn()
 {
-	usleep(1000000);
+	usleep(750000);
 	moveServo(ID_L_ELBOW, 3107);
 }
 
