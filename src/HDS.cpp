@@ -185,20 +185,67 @@ void HDS::beginPosition()
 	moveServo(ID_L_ELBOW, 3107);
 }
 
-	void HDS::rShoulderRollOut() {}
-	void HDS::lShoulderRollOut() {}
-	void HDS::rShoulderRollIn() {}
-	void HDS::lShoulderRollIn() {}
-	void HDS::rShoulderTurnIn() {}
-	void HDS::lShoulderTurnIn() {}
-	void HDS::rShoulderTurnOut() {}
-	void HDS::lShoulderTurnOut() {}
-	void HDS::rElbowOut() {}
-	void HDS::lElbowOut() {}
-	void HDS::rElbowIn() {}
-	void HDS::lElbowIn() {}
+void HDS::rShoulderRollOut()
+{
+	usleep(1000000);
+	moveServo(ID_R_SHOULDER_ROLL, 2562);
+}
+void HDS::rShoulderRollIn()
+{
+	usleep(1000000);
+	moveServo(ID_R_SHOULDER_ROLL, 1560);
+}
+void HDS::rShoulderTurnOut()
+{
+	usleep(1000000);
+	moveServo(ID_R_SHOULDER_PITCH, 963);
+}
+void HDS::rShoulderTurnIn()
+{
+	usleep(1000000);
+	moveServo(ID_R_SHOULDER_PITCH, 1948);
+}
+void HDS::rElbowOut()
+{
+	usleep(1000000);
+	moveServo(ID_R_ELBOW, 2043);
+}
+void HDS::rElbowIn()
+{
+	usleep(1000000);
+	moveServo(ID_R_ELBOW, 980);
+}
+void HDS::lShoulderRollOut()
+{
+	usleep(1000000);
+	moveServo(ID_L_SHOULDER_ROLL, 1520);
+}
+void HDS::lShoulderRollIn()
+{
+	usleep(1000000);
+	moveServo(ID_L_SHOULDER_ROLL, 2534);
+}
+void HDS::lShoulderTurnOut()
+{
+	usleep(1000000);
+	moveServo(ID_L_SHOULDER_PITCH, 1067);
+}
+void HDS::lShoulderTurnIn()
+{
+	usleep(1000000);
+	moveServo(ID_L_SHOULDER_PITCH, 2127);
+}
+void HDS::lElbowOut()
+{
+	usleep(1000000);
+	moveServo(ID_L_ELBOW, 2063);
+}
+void HDS::lElbowIn()
+{
+	usleep(1000000);
+	moveServo(ID_L_ELBOW, 3107);
+}
 
 void HDS::makeTransition(std::string trans)
 {
-
 }
