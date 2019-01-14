@@ -81,6 +81,18 @@ bool HDS::readMoveServo(unsigned char id)
 	return true;
 }
 
+void HDS::doPollMove(unsigned char id, int value)
+{
+	moveServo(id, value);
+	while (true)
+	{
+		if (abs(readServo(id) - value) <= 55)
+		{
+			break;
+		}
+	}
+}
+
 void HDS::readArms()
 {
 	dxlPowerOn();
@@ -187,63 +199,51 @@ void HDS::beginPosition()
 
 void HDS::rShoulderRollOut()
 {
-	usleep(1000000);
-	moveServo(ID_R_SHOULDER_ROLL, 2562);
+	doPollMove(ID_R_SHOULDER_ROLL, 2562);
 }
 void HDS::rShoulderRollIn()
 {
-	usleep(1000000);
-	moveServo(ID_R_SHOULDER_ROLL, 1560);
+	doPollMove(ID_R_SHOULDER_ROLL, 1560);
 }
 void HDS::rShoulderTurnOut()
 {
-	usleep(1000000);
-	moveServo(ID_R_SHOULDER_PITCH, 963);
+	doPollMove(ID_R_SHOULDER_PITCH, 963);
 }
 void HDS::rShoulderTurnIn()
 {
-	usleep(1000000);
-	moveServo(ID_R_SHOULDER_PITCH, 1948);
+	doPollMove(ID_R_SHOULDER_PITCH, 1948);
 }
 void HDS::rElbowOut()
 {
-	usleep(750000);
-	moveServo(ID_R_ELBOW, 2043);
+	doPollMove(ID_R_ELBOW, 2043);
 }
 void HDS::rElbowIn()
 {
-	usleep(750000);
-	moveServo(ID_R_ELBOW, 980);
+	doPollMove(ID_R_ELBOW, 980);
 }
 void HDS::lShoulderRollOut()
 {
-	usleep(1000000);
-	moveServo(ID_L_SHOULDER_ROLL, 1520);
+	doPollMove(ID_L_SHOULDER_ROLL, 1520);
 }
 void HDS::lShoulderRollIn()
 {
-	usleep(1000000);
-	moveServo(ID_L_SHOULDER_ROLL, 2534);
+	doPollMove(ID_L_SHOULDER_ROLL, 2534);
 }
 void HDS::lShoulderTurnOut()
 {
-	usleep(1000000);
-	moveServo(ID_L_SHOULDER_PITCH, 1067);
+	doPollMove(ID_L_SHOULDER_PITCH, 1067);
 }
 void HDS::lShoulderTurnIn()
 {
-	usleep(1000000);
-	moveServo(ID_L_SHOULDER_PITCH, 2127);
+	doPollMove(ID_L_SHOULDER_PITCH, 2127);
 }
 void HDS::lElbowOut()
 {
-	usleep(750000);
-	moveServo(ID_L_ELBOW, 2063);
+	doPollMove(ID_L_ELBOW, 2063);
 }
 void HDS::lElbowIn()
 {
-	usleep(750000);
-	moveServo(ID_L_ELBOW, 3107);
+	doPollMove(ID_L_ELBOW, 3107);
 }
 
 void HDS::makeTransition(std::string trans)
@@ -264,7 +264,7 @@ void HDS::makeTransition(std::string trans)
 	{
 		lShoulderTurnIn();
 	}
-	else if (trans == "left.ElbowInPositon")
+	else if (trans == "left.ElbowInPosition")
 	{
 		lElbowOut();
 	}
@@ -288,7 +288,7 @@ void HDS::makeTransition(std::string trans)
 	{
 		rShoulderTurnIn();
 	}
-	else if (trans == "right.ElbowInPositon")
+	else if (trans == "right.ElbowInPosition")
 	{
 		rElbowOut();
 	}
